@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>方案與定價 - 避錯寶 (Bitrobo)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .gradient-text {
+            background: -webkit-linear-gradient(45deg, #6d28d9, #2563eb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .pricing-bg {
+            background-color: #f8fafc;
+            background-image: radial-gradient(#dbeafe 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .cta-button {
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px -10px rgba(99, 102, 241, 0.5);
+        }
+        .pricing-toggle-bg {
+            transition: background-color 0.3s ease;
+        }
+        .pricing-toggle-handle {
+            transition: transform 0.3s ease;
+        }
+        input:checked + .pricing-toggle-bg {
+            background-color: #4f46e5; /* indigo-600 */
+        }
+        input:checked + .pricing-toggle-bg .pricing-toggle-handle {
+            transform: translateX(100%);
+        }
+    </style>
+</head>
+<body class="text-slate-700">
+
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold gradient-text">避錯寶</a>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#" class="text-slate-600 hover:text-indigo-600">功能介紹</a>
+                <a href="#" class="text-indigo-600 font-semibold">方案與定價</a>
+                <a href="#" class="text-slate-600 hover:text-indigo-600">資源部落格</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="#" class="text-slate-600 hover:text-indigo-600">登入</a>
+                <a href="#" class="bg-indigo-600 text-white px-5 py-2 rounded-full font-semibold hover:bg-indigo-700 cta-button">免費開始使用</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pricing-bg">
+        <section class="container mx-auto px-6 py-20">
+            <!-- Title -->
+            <div class="text-center max-w-3xl mx-auto">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900">透明的定價，無限的價值</h1>
+                <p class="mt-4 text-lg text-slate-600">選擇最適合您生意規模的方案。從免費開始，隨時升級。</p>
+            </div>
+
+            <!-- Billing Toggle -->
+            <div class="mt-12 flex justify-center items-center space-x-4">
+                <span class="font-medium text-slate-600">月繳</span>
+                <label for="billing-toggle" class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="billing-toggle" class="sr-only peer">
+                    <div class="w-14 h-8 bg-slate-200 rounded-full peer-focus:ring-4 peer-focus:ring-indigo-300 pricing-toggle-bg">
+                        <div class="absolute top-1 left-1 bg-white border border-slate-200 rounded-full h-6 w-6 pricing-toggle-handle"></div>
+                    </div>
+                </label>
+                <span class="font-medium text-slate-600">年繳 (省下 2 個月費用)</span>
+            </div>
+
+            <!-- Pricing Cards -->
+            <div class="mt-10 grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Free Plan -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-200 flex flex-col">
+                    <h3 class="text-2xl font-bold text-slate-900">免費版</h3>
+                    <p class="mt-2 text-slate-500">適合剛起步的個人賣家</p>
+                    <p class="mt-6 text-4xl font-extrabold text-slate-900">NT$0 <span class="text-lg font-medium text-slate-500">/ 永久</span></p>
+                    <a href="#" class="mt-6 w-full text-center bg-slate-100 text-slate-700 font-semibold py-3 rounded-lg hover:bg-slate-200 transition-colors">立即開始</a>
+                    <ul class="mt-8 space-y-4 text-slate-600 flex-grow">
+                        <li class="flex items-center"><svg class="w-5 h-5 text-indigo-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>智慧庫存管理</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 text-indigo-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>最多 50 項商品 (SKU)</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 text-indigo-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>基礎銷售報表</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 text-indigo-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>社群支援</li>
+                    </ul>
+                </div>
+
+                <!-- Pro Plan -->
+                <div class="bg-white p-8 rounded-2xl shadow-2xl border-2 border-indigo-600 flex flex-col relative">
+                    <div class="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2">
+                        <span class="bg-indigo-600 text-white text-sm font-semibold px-4 py-1 rounded-full">最受歡迎</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-900">專業版</h3>
+                    <p class="mt-2 text-slate-500">為成長中的選物店與專業代購打造</p>
+                    <div class="mt-6">
+                        <p class="text-4xl font-extrabold text-slate-900">
+                            <span data-price-monthly="1,299">NT$1,299</span>
+                            <span data-price-yearly="1,082" class="hidden">NT$1,082</span>
+                            <span class="text-lg font-medium text-slate-500">/ 月</span>
+                        </p>
+                        <p class="text-sm text-slate-500 hidden yearly-text">年繳總計 NT$12,990</p>
+                    </div>
+                    <a href="#" class="mt-6 w-full text-center bg-indigo-600 text-white font-semibold py-3 rounded-lg hover:bg-indigo-700 cta-button">選擇專業版</a>
+                    <ul class="mt-8 space-y-4 text-slate-600 flex-grow">
+                        <li class="flex items-center font-semibold"><svg class="w-5 h-5 text-indigo-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>包含所有免費版功能</li>
+                        <li class="flex items-center font-semibold"><svg class="w-5 h-5 text-indigo-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>AI 進貨建議</li>
+                        <li class="flex items-center font-semibold"><svg class="w-5 h-5 text-indigo-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>市場趨勢分析</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 text-indigo-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>無限商品數量</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 text-indigo-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>進階數據報告</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 text-indigo-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>優先 Email 支援</li>
+                    </ul>
+                </div>
+
+                <!-- Business Plan -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-200 flex flex-col">
+                    <h3 class="text-2xl font-bold text-slate-900">企業版</h3>
+                    <p class="mt-2 text-slate-500">為具規模的電商團隊提供客製化方案</p>
+                    <p class="mt-6 text-4xl font-extrabold text-slate-900">聯繫我們</p>
+                    <a href="#" class="mt-6 w-full text-center bg-slate-100 text-slate-700 font-semibold py-3 rounded-lg hover:bg-slate-200 transition-colors">洽詢方案</a>
+                    <ul class="mt-8 space-y-4 text-slate-600 flex-grow">
+                        <li class="flex items-center font-semibold"><svg class="w-5 h-5 text-indigo-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>包含所有專業版功能</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 text-indigo-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>API 存取權限</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 text-indigo-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>客製化導入服務</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 text-indigo-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>專屬客戶經理</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 text-indigo-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>團隊成員協作</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900">常見問題</h2>
+                    <p class="mt-4 text-lg text-slate-600">還有疑問嗎？我們在這裡為您解答。</p>
+                </div>
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="font-semibold text-lg text-slate-800">我可以隨時取消訂閱嗎？</h3>
+                        <p class="mt-2 text-slate-600">可以的，您隨時可以在帳戶設定中取消您的訂閱。您的方案將會持續到當前計費週期結束為止。</p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-lg text-slate-800">年繳和月繳有什麼不同？</h3>
+                        <p class="mt-2 text-slate-600">選擇年繳方案，您將一次性支付一年的費用，但可以享有相當於兩個月免費的折扣，這是我們最優惠的選擇。</p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-lg text-slate-800">我的庫存和銷售數據安全嗎？</h3>
+                        <p class="mt-2 text-slate-600">絕對安全。我們採用銀行級別的加密技術保護您的所有數據。我們絕不會在未經您明確授權的情況下，將您的個別商業數據分享給任何第三方。</p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-lg text-slate-800">如果我需要的商品超過免費版的限制怎麼辦？</h3>
+                        <p class="mt-2 text-slate-600">當您的生意成長，您可以無縫升級到專業版，即可享有無限商品數量的管理權限，以及所有強大的 AI 分析功能。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">避錯寶</h3>
+                    <p>用數據和 AI，賦能每一位電商賣家。</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white mb-4">產品</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white">功能介紹</a></li>
+                        <li><a href="#" class="hover:text-white">方案與定價</a></li>
+                        <li><a href="#" class="hover:text-white">成功案例</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white mb-4">資源</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white">部落格</a></li>
+                        <li><a href="#" class="hover:text-white">幫助中心</a></li>
+                        <li><a href="#" class="hover:text-white">聯絡我們</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white mb-4">法律</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white">服務條款</a></li>
+                        <li><a href="#" class="hover:text-white">隱私權政策</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-slate-800 pt-8 text-center text-sm">
+                <p>&copy; 2025 Bitrobo Inc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const toggle = document.getElementById('billing-toggle');
+        const monthlyPrices = document.querySelectorAll('[data-price-monthly]');
+        const yearlyPrices = document.querySelectorAll('[data-price-yearly]');
+        const yearlyText = document.querySelectorAll('.yearly-text');
+
+        toggle.addEventListener('change', () => {
+            if (toggle.checked) { // Yearly
+                monthlyPrices.forEach(p => p.classList.add('hidden'));
+                yearlyPrices.forEach(p => p.classList.remove('hidden'));
+                yearlyText.forEach(t => t.classList.remove('hidden'));
+            } else { // Monthly
+                monthlyPrices.forEach(p => p.classList.remove('hidden'));
+                yearlyPrices.forEach(p => p.classList.add('hidden'));
+                yearlyText.forEach(t => t.classList.add('hidden'));
+            }
+        });
+    </script>
+
+</body>
+</html>

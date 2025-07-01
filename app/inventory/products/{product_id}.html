@@ -28,6 +28,17 @@
             color: #ffffff;
             transform: translateX(5px);
         }
+        .loader {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 3px solid #ffffff;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body class="flex h-screen">
@@ -77,7 +88,7 @@
                 <a href="#" class="text-slate-500 hover:text-indigo-600">&larr; 返回庫存列表</a>
                 <img src="https://images.pexels.com/photos/1032110/pexels-photo-1032110.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Product Image" class="w-16 h-16 rounded-lg object-cover">
                 <div>
-                    <h1 class="text-3xl font-bold text-slate-900">ASICS GEL-KAYANO 14</h1>
+                    <h1 id="product-name" class="text-3xl font-bold text-slate-900">ASICS GEL-KAYANO 14</h1>
                     <p class="text-slate-500">SKU: ASC-GK14-SLV-9</p>
                 </div>
             </div>
@@ -90,6 +101,21 @@
             <div class="bg-white p-6 rounded-2xl shadow-lg"><h3 class="text-slate-500">總利潤</h3><p class="text-3xl font-bold text-green-600 mt-2">NT$ 44,500</p></div>
             <div class="bg-white p-6 rounded-2xl shadow-lg"><h3 class="text-slate-500">平均毛利率</h3><p class="text-3xl font-bold text-slate-900 mt-2">38.9%</p></div>
             <div class="bg-white p-6 rounded-2xl shadow-lg"><h3 class="text-slate-500">售出率</h3><p class="text-3xl font-bold text-slate-900 mt-2">71.4%</p></div>
+        </div>
+        
+        <!-- AI Diagnosis & Action -->
+        <div id="ai-diagnosis-section" class="mt-8 bg-white p-6 rounded-2xl shadow-lg">
+            <h3 class="font-bold text-slate-900 flex items-center gap-2 mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                ✨ AI 綜合診斷與行動建議
+            </h3>
+            <div id="ai-diagnosis-content">
+                 <button id="generate-diagnosis-btn" class="w-full md:w-auto px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors flex items-center justify-center gap-2">
+                    <span id="diagnosis-btn-text">產生 AI 診斷報告</span>
+                    <div id="diagnosis-btn-loader" class="loader hidden"></div>
+                </button>
+            </div>
+            <div id="ai-marketing-content" class="mt-4 hidden"></div>
         </div>
 
         <!-- Main Grid -->
@@ -157,67 +183,87 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // --- Chart ---
             const ctx = document.getElementById('salesHistoryChart').getContext('2d');
-            
-            const labels = Array.from({length: 90}, (_, i) => {
-                const d = new Date();
-                d.setDate(d.getDate() - (89 - i));
-                return d;
-            });
-            
+            const labels = Array.from({length: 90}, (_, i) => { const d = new Date(); d.setDate(d.getDate() - (89 - i)); return d; });
             const salesData = Array.from({length: 90}, () => Math.floor(Math.random() * 5) + (Math.random() > 0.9 ? Math.floor(Math.random() * 10) : 0));
             let inventoryLevel = 50;
             const inventoryData = [];
-            salesData.forEach((sale, i) => {
-                if (i === 40) inventoryLevel += 20; // Simulate restock
-                inventoryLevel -= sale;
-                inventoryData.push(inventoryLevel);
-            });
+            salesData.forEach((sale, i) => { if (i === 40) inventoryLevel += 20; inventoryLevel -= sale; inventoryData.push(inventoryLevel); });
+            new Chart(ctx, { type: 'bar', data: { labels: labels, datasets: [ { label: '每日銷售量', data: salesData, backgroundColor: '#4f46e5', order: 1 }, { label: '期末庫存', data: inventoryData, borderColor: '#fbbf24', borderWidth: 2, type: 'line', tension: 0.4, pointRadius: 0, order: 0 } ] }, options: { responsive: true, maintainAspectRatio: false, scales: { x: { type: 'time', time: { unit: 'month' }, grid: { display: false } }, y: { beginAtZero: true, position: 'left', title: { display: true, text: '數量 (件)' } } }, plugins: { legend: { position: 'top', align: 'end' }, tooltip: { mode: 'index', intersect: false } } } });
 
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: labels,
-                    datasets: [
-                        {
-                            label: '每日銷售量',
-                            data: salesData,
-                            backgroundColor: '#4f46e5',
-                            order: 1
-                        },
-                        {
-                            label: '期末庫存',
-                            data: inventoryData,
-                            borderColor: '#fbbf24',
-                            borderWidth: 2,
-                            type: 'line',
-                            tension: 0.4,
-                            pointRadius: 0,
-                            order: 0
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: {
-                            type: 'time',
-                            time: { unit: 'month' },
-                            grid: { display: false }
-                        },
-                        y: {
-                            beginAtZero: true,
-                            position: 'left',
-                            title: { display: true, text: '數量 (件)' }
-                        }
-                    },
-                    plugins: {
-                        legend: { position: 'top', align: 'end' },
-                        tooltip: { mode: 'index', intersect: false }
-                    }
+            // --- AI Diagnosis ---
+            const diagnosisBtn = document.getElementById('generate-diagnosis-btn');
+            const diagnosisBtnText = document.getElementById('diagnosis-btn-text');
+            const diagnosisBtnLoader = document.getElementById('diagnosis-btn-loader');
+            const diagnosisContent = document.getElementById('ai-diagnosis-content');
+            const marketingContent = document.getElementById('ai-marketing-content');
+            const productName = document.getElementById('product-name').textContent;
+
+            async function callGemini(prompt, schema) {
+                const apiKey = "";
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }], generationConfig: { responseMimeType: "application/json", responseSchema: schema, temperature: 0.6 } };
+                const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                if (!response.ok) throw new Error(`API 錯誤: ${response.status} ${response.statusText}`);
+                const result = await response.json();
+                if (result.candidates && result.candidates.length > 0) {
+                    return JSON.parse(result.candidates[0].content.parts[0].text);
+                } else { throw new Error("AI 未能提供有效的分析結果。"); }
+            }
+
+            async function handleDiagnosis() {
+                diagnosisBtn.disabled = true;
+                diagnosisBtnText.classList.add('hidden');
+                diagnosisBtnLoader.classList.remove('hidden');
+                diagnosisContent.innerHTML += `<div id="loading-text" class="text-sm text-slate-500 mt-2">AI 正在分析數據，請稍候...</div>`;
+
+                const prompt = `您是「避錯寶」的資深電商分析師。請分析以下「${productName}」的數據，並提供診斷報告。數據：總銷售額 NT$114,500，總利潤 NT$44,500，毛利率 38.9%，售出率 71.4%。銷售歷史顯示初期強勁，但近一個月趨緩。目前庫存 48 件。歷史建議與決策皆符合預期。請提供 JSON 格式的回應，包含：1. 'diagnosis' (string): 一段關於此商品現況的簡短診斷。2. 'suggestion' (string): 一句主要的核心建議。`;
+                const schema = { type: "OBJECT", properties: { diagnosis: { type: "STRING" }, suggestion: { type: "STRING" } } };
+
+                try {
+                    const result = await callGemini(prompt, schema);
+                    diagnosisContent.innerHTML = `
+                        <p class="text-slate-600">${result.diagnosis}</p>
+                        <div class="mt-4 p-4 bg-indigo-50 border-l-4 border-indigo-400 rounded-r-lg">
+                            <p class="font-bold text-indigo-800">核心建議：${result.suggestion}</p>
+                        </div>
+                        <div class="mt-4 flex gap-2">
+                            <button id="generate-post-btn" class="px-4 py-2 bg-white border border-slate-300 text-slate-700 text-sm font-semibold rounded-lg hover:bg-slate-50">✨ 產生促銷文案</button>
+                            <button class="px-4 py-2 bg-white border border-slate-300 text-slate-700 text-sm font-semibold rounded-lg hover:bg-slate-50">尋找捆綁商品</button>
+                        </div>
+                    `;
+                    document.getElementById('generate-post-btn').addEventListener('click', handleMarketingPost);
+                } catch (error) {
+                    diagnosisContent.innerHTML = `<p class="text-red-500">診斷失敗：${error.message}</p>`;
                 }
-            });
+            }
+
+            async function handleMarketingPost() {
+                const postBtn = document.getElementById('generate-post-btn');
+                postBtn.innerHTML = '<span class="flex items-center gap-2">正在生成... <div class="w-4 h-4 rounded-full animate-spin border-2 border-dashed border-indigo-500 border-t-transparent"></div></span>';
+                postBtn.disabled = true;
+
+                const prompt = `您是一位經驗豐富的社群行銷專家。請為商品「${productName}」撰寫一篇吸引人的繁體中文 Instagram 促銷貼文，目標是去化庫存。文案需簡短有力，包含表情符號和相關 hashtags。`;
+                const schema = { type: "OBJECT", properties: { post: { type: "STRING" } } };
+
+                try {
+                    const result = await callGemini(prompt, schema);
+                    marketingContent.innerHTML = `
+                        <h4 class="font-bold text-slate-800">AI 產生之行銷文案</h4>
+                        <div class="mt-2 p-4 bg-slate-100 rounded-lg whitespace-pre-wrap text-sm text-slate-700">${result.post}</div>
+                    `;
+                    marketingContent.classList.remove('hidden');
+                } catch (error) {
+                     marketingContent.innerHTML = `<p class="text-red-500">文案生成失敗：${error.message}</p>`;
+                     marketingContent.classList.remove('hidden');
+                } finally {
+                    postBtn.innerHTML = '✨ 產生促銷文案';
+                    postBtn.disabled = false;
+                }
+            }
+
+            diagnosisBtn.addEventListener('click', handleDiagnosis);
         });
     </script>
 

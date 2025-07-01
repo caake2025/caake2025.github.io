@@ -11,67 +11,18 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
     <style>
-        body {
-            font-family: 'Inter', 'Noto Sans TC', sans-serif;
-            background-color: #f1f5f9; /* slate-100 */
-        }
-        .gradient-text {
-            background: -webkit-linear-gradient(45deg, #6d28d9, #2563eb);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .sidebar-link {
-            transition: all 0.2s ease;
-        }
-        .sidebar-link:hover, .sidebar-link.active {
-            background-color: #4338ca; /* indigo-700 */
-            color: #ffffff;
-            transform: translateX(5px);
-        }
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; background-color: #f1f5f9; }
+        .gradient-text { background: -webkit-linear-gradient(45deg, #6d28d9, #2563eb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .sidebar-link { transition: all 0.2s ease; }
+        .sidebar-link:hover, .sidebar-link.active { background-color: #4338ca; color: #ffffff; transform: translateX(5px); }
     </style>
 </head>
 <body class="flex h-screen">
 
-    <!-- Sidebar -->
-    <aside class="w-64 bg-slate-900 text-slate-300 flex flex-col p-4">
-        <div class="text-2xl font-bold gradient-text mb-10 px-2">避錯寶</div>
-        <nav class="flex-grow space-y-2">
-            <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg sidebar-link">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" /></svg>
-                <span>主控儀表板</span>
-            </a>
-            <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg sidebar-link">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" /></svg>
-                <span>AI 進貨顧問</span>
-            </a>
-            <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg sidebar-link">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M5 8a3 3 0 000 6h10a3 3 0 000-6H5z" /></svg>
-                <span>智慧庫存管理</span>
-            </a>
-            <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg sidebar-link">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 11.586l3.293-3.293a1 1 0 011.414 0l-3 3a1 1 0 010 1.414z" clip-rule="evenodd" /></svg>
-                <span>市場趨勢洞察</span>
-            </a>
-            <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg sidebar-link active">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" /></svg>
-                <span>數據報告</span>
-            </a>
-        </nav>
-        <div class="mt-auto">
-            <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg sidebar-link">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.96.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01-.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" /></svg>
-                <span>帳戶設定</span>
-            </a>
-            <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg sidebar-link">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd" /></svg>
-                <span>登出</span>
-            </a>
-        </div>
-    </aside>
+    <div id="sidebar-container"></div>
 
     <!-- Main Content -->
     <main class="flex-1 p-8 overflow-y-auto">
-        <!-- Header -->
         <header class="flex justify-between items-center mb-8">
             <div>
                 <h1 class="text-3xl font-bold text-slate-900">數據報告</h1>
@@ -79,8 +30,6 @@
             </div>
             <img src="https://raw.githubusercontent.com/hctsai1006/hctsai1006.github.io/main/consumer-verse/%E9%BB%83%E5%8B%A4%E5%80%AB.png" alt="勤倫頭像" class="w-12 h-12 rounded-full object-cover">
         </header>
-
-        <!-- Filter Bar -->
         <div class="bg-white p-4 rounded-2xl shadow-lg flex flex-col md:flex-row items-center gap-4">
             <span class="font-semibold text-slate-700">報告區間:</span>
             <div class="flex items-center gap-2 flex-wrap">
@@ -92,8 +41,6 @@
                 <input type="date" class="p-2 border border-slate-200 rounded-lg text-sm">
             </div>
         </div>
-
-        <!-- Overview Cards -->
         <div class="mt-8">
             <h2 class="text-xl font-bold text-slate-800 mb-4">銷售總覽</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -103,17 +50,6 @@
                 <div class="bg-white p-6 rounded-2xl shadow-lg"><h3 class="text-slate-500">平均客單價</h3><p class="text-3xl font-bold text-slate-900 mt-2">NT$ 1,923</p></div>
             </div>
         </div>
-        <div class="mt-8">
-            <h2 class="text-xl font-bold text-slate-800 mb-4">庫存健康度</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-white p-6 rounded-2xl shadow-lg"><h3 class="text-slate-500">總庫存價值</h3><p class="text-3xl font-bold text-slate-900 mt-2">NT$ 475,100</p></div>
-                <div class="bg-white p-6 rounded-2xl shadow-lg"><h3 class="text-slate-500">週轉率</h3><p class="text-3xl font-bold text-slate-900 mt-2">0.8 <span class="text-lg">次/月</span></p></div>
-                <div class="bg-white p-6 rounded-2xl shadow-lg"><h3 class="text-slate-500">滯銷品項</h3><p class="text-3xl font-bold text-amber-600 mt-2">12 <span class="text-lg">項</span></p></div>
-                <div class="bg-white p-6 rounded-2xl shadow-lg"><h3 class="text-slate-500">滯銷庫存價值</h3><p class="text-3xl font-bold text-red-600 mt-2">NT$ 58,300</p></div>
-            </div>
-        </div>
-
-        <!-- Charts -->
         <div class="mt-8 grid grid-cols-1 lg:grid-cols-5 gap-6">
             <div class="lg:col-span-3 bg-white p-6 rounded-2xl shadow-lg">
                 <h3 class="font-bold text-slate-900">按日銷售額與利潤 (本週)</h3>
@@ -126,117 +62,49 @@
                 </div>
             </div>
         </div>
-        
-        <!-- Downloadable Reports -->
-        <div class="mt-8 bg-white p-6 rounded-2xl shadow-lg">
-            <h2 class="text-xl font-bold text-slate-800 mb-4">下載報告中心</h2>
-            <div class="divide-y divide-slate-200">
-                <div class="py-4 flex flex-col md:flex-row justify-between md:items-center">
-                    <div>
-                        <h4 class="font-semibold text-slate-800">銷售明細報告</h4>
-                        <p class="text-sm text-slate-500">包含每一筆訂單的詳細資訊，如時間、商品、數量、金額與顧客資訊。</p>
-                    </div>
-                    <div class="mt-4 md:mt-0 flex items-center gap-2">
-                        <button class="px-4 py-2 text-sm bg-slate-100 text-slate-700 font-semibold rounded-lg hover:bg-slate-200">下載 CSV</button>
-                        <button class="px-4 py-2 text-sm bg-slate-100 text-slate-700 font-semibold rounded-lg hover:bg-slate-200">下載 PDF</button>
-                    </div>
-                </div>
-                <div class="py-4 flex flex-col md:flex-row justify-between md:items-center">
-                    <div>
-                        <h4 class="font-semibold text-slate-800">庫存狀態報告</h4>
-                        <p class="text-sm text-slate-500">當前所有商品的完整庫存列表，包含庫存量、庫存價值與狀態。</p>
-                    </div>
-                    <div class="mt-4 md:mt-0 flex items-center gap-2">
-                        <button class="px-4 py-2 text-sm bg-slate-100 text-slate-700 font-semibold rounded-lg hover:bg-slate-200">下載 CSV</button>
-                        <button class="px-4 py-2 text-sm bg-slate-100 text-slate-700 font-semibold rounded-lg hover:bg-slate-200">下載 PDF</button>
-                    </div>
-                </div>
-                <div class="py-4 flex flex-col md:flex-row justify-between md:items-center">
-                    <div>
-                        <h4 class="font-semibold text-slate-800">利潤分析報告</h4>
-                        <p class="text-sm text-slate-500">分析各商品與品類的毛利與毛利率，助您優化商品組合。</p>
-                    </div>
-                    <div class="mt-4 md:mt-0 flex items-center gap-2">
-                        <button class="px-4 py-2 text-sm bg-slate-100 text-slate-700 font-semibold rounded-lg hover:bg-slate-200">下載 CSV</button>
-                        <button class="px-4 py-2 text-sm bg-slate-100 text-slate-700 font-semibold rounded-lg hover:bg-slate-200">下載 PDF</button>
-                    </div>
-                </div>
-            </div>
-        </div>
     </main>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // --- Daily Sales Chart ---
-            const dailySalesCtx = document.getElementById('dailySalesChart').getContext('2d');
-            new Chart(dailySalesCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['週一', '週二', '週三', '週四', '週五', '週六', '週日'],
-                    datasets: [
-                        {
-                            label: '銷售額',
-                            data: [12050, 13200, 9800, 15400, 18300, 22100, 19700],
-                            backgroundColor: '#4f46e5',
-                            borderRadius: 6,
-                        },
-                        {
-                            label: '利潤',
-                            data: [3500, 3900, 2800, 4500, 5400, 6800, 5900],
-                            backgroundColor: '#10b981',
-                            borderRadius: 6,
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: { ticks: { callback: (value) => 'NT$' + (value / 1000) + 'k' } },
-                        x: { grid: { display: false } }
-                    },
-                    plugins: {
-                        legend: { position: 'top', align: 'end' },
-                        tooltip: { mode: 'index', intersect: false }
-                    }
-                }
-            });
+        const generateSidebar = (activePage) => {
+            const links = [
+                { id: 'dashboard', href: 'app-dashboard.html', text: '主控儀表板', icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" /></svg>` },
+                { id: 'advisor', href: 'app-advisor.html', text: 'AI 進貨顧問', icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" /></svg>` },
+                { id: 'inventory', href: 'app-inventory.html', text: '智慧庫存管理', icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M5 8a3 3 0 000 6h10a3 3 0 000-6H5z" /></svg>` },
+                { id: 'market', href: 'app-market.html', text: '市場趨勢洞察', icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 11.586l3.293-3.293a1 1 0 011.414 0l-3 3a1 1 0 010 1.414z" clip-rule="evenodd" /></svg>` },
+                { id: 'reports', href: 'app-reports.html', text: '數據報告', icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" /></svg>` }
+            ];
 
-            // --- Profit Category Chart ---
-            const profitCategoryCtx = document.getElementById('profitCategoryChart').getContext('2d');
-            new Chart(profitCategoryCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['潮流球鞋', '美妝保養', '服飾配件'],
-                    datasets: [{
-                        data: [11295, 9789, 4016], // Profit values
-                        backgroundColor: ['#3b82f6', '#6366f1', '#14b8a6'],
-                        hoverOffset: 4,
-                        borderWidth: 0,
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { position: 'bottom', labels: { padding: 20, usePointStyle: true, pointStyle: 'circle' } },
-                        tooltip: {
-                             callbacks: {
-                                label: (context) => {
-                                    let label = context.label || '';
-                                    if (label) { label += ': '; }
-                                    if (context.parsed !== null) {
-                                        label += new Intl.NumberFormat('zh-TW', { style: 'currency', currency: 'TWD', minimumFractionDigits: 0 }).format(context.parsed);
-                                    }
-                                    return label;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
+            const navLinks = links.map(link => `
+                <a href="${link.href}" class="flex items-center gap-3 px-4 py-3 rounded-lg sidebar-link ${activePage === link.id ? 'active' : ''}">
+                    ${link.icon}
+                    <span>${link.text}</span>
+                </a>
+            `).join('');
+
+            const sidebarHTML = `
+                <aside class="w-64 bg-slate-900 text-slate-300 flex flex-col p-4">
+                    <div class="text-2xl font-bold gradient-text mb-10 px-2">避錯寶</div>
+                    <nav class="flex-grow space-y-2">${navLinks}</nav>
+                    <div class="mt-auto">
+                        <a href="app-settings.html" class="flex items-center gap-3 px-4 py-3 rounded-lg sidebar-link ${activePage === 'settings' ? 'active' : ''}">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.96.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01-.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" /></svg>
+                            <span>帳戶設定</span>
+                        </a>
+                        <a href="auth.html" class="flex items-center gap-3 px-4 py-3 rounded-lg sidebar-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd" /></svg>
+                            <span>登出</span>
+                        </a>
+                    </div>
+                </aside>
+            `;
+            document.getElementById('sidebar-container').innerHTML = sidebarHTML;
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+             // 在此頁面呼叫，並傳入 'reports'
+            generateSidebar('reports');
+            // ... (其餘 Chart 的腳本) ...
         });
     </script>
-
 </body>
 </html>

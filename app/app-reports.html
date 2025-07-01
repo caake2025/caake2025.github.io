@@ -53,12 +53,49 @@
         <div class="mt-8 grid grid-cols-1 lg:grid-cols-5 gap-6">
             <div class="lg:col-span-3 bg-white p-6 rounded-2xl shadow-lg">
                 <h3 class="font-bold text-slate-900">按日銷售額與利潤 (本週)</h3>
-                <canvas id="dailySalesChart" class="mt-4 h-80"></canvas>
+                <div class="relative mt-4 h-80">
+                    <canvas id="dailySalesChart"></canvas>
+                </div>
             </div>
             <div class="lg:col-span-2 bg-white p-6 rounded-2xl shadow-lg">
                 <h3 class="font-bold text-slate-900">暢銷商品類別 (依利潤)</h3>
                 <div class="flex justify-center items-center h-full max-h-80">
                     <canvas id="profitCategoryChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="mt-8 bg-white p-6 rounded-2xl shadow-lg">
+            <h2 class="text-xl font-bold text-slate-800 mb-4">下載報告中心</h2>
+            <div class="divide-y divide-slate-200">
+                <div class="py-4 flex flex-col md:flex-row justify-between md:items-center">
+                    <div>
+                        <h4 class="font-semibold text-slate-800">銷售明細報告</h4>
+                        <p class="text-sm text-slate-500">包含每一筆訂單的詳細資訊，如時間、商品、數量、金額與顧客資訊。</p>
+                    </div>
+                    <div class="mt-4 md:mt-0 flex items-center gap-2">
+                        <button class="px-4 py-2 text-sm bg-slate-100 text-slate-700 font-semibold rounded-lg hover:bg-slate-200">下載 CSV</button>
+                        <button class="px-4 py-2 text-sm bg-slate-100 text-slate-700 font-semibold rounded-lg hover:bg-slate-200">下載 PDF</button>
+                    </div>
+                </div>
+                <div class="py-4 flex flex-col md:flex-row justify-between md:items-center">
+                    <div>
+                        <h4 class="font-semibold text-slate-800">庫存狀態報告</h4>
+                        <p class="text-sm text-slate-500">當前所有商品的完整庫存列表，包含庫存量、庫存價值與狀態。</p>
+                    </div>
+                    <div class="mt-4 md:mt-0 flex items-center gap-2">
+                        <button class="px-4 py-2 text-sm bg-slate-100 text-slate-700 font-semibold rounded-lg hover:bg-slate-200">下載 CSV</button>
+                        <button class="px-4 py-2 text-sm bg-slate-100 text-slate-700 font-semibold rounded-lg hover:bg-slate-200">下載 PDF</button>
+                    </div>
+                </div>
+                <div class="py-4 flex flex-col md:flex-row justify-between md:items-center">
+                    <div>
+                        <h4 class="font-semibold text-slate-800">利潤分析報告</h4>
+                        <p class="text-sm text-slate-500">分析各商品與品類的毛利與毛利率，助您優化商品組合。</p>
+                    </div>
+                    <div class="mt-4 md:mt-0 flex items-center gap-2">
+                        <button class="px-4 py-2 text-sm bg-slate-100 text-slate-700 font-semibold rounded-lg hover:bg-slate-200">下載 CSV</button>
+                        <button class="px-4 py-2 text-sm bg-slate-100 text-slate-700 font-semibold rounded-lg hover:bg-slate-200">下載 PDF</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -101,9 +138,75 @@
         };
 
         document.addEventListener('DOMContentLoaded', () => {
-             // 在此頁面呼叫，並傳入 'reports'
             generateSidebar('reports');
-            // ... (其餘 Chart 的腳本) ...
+            
+            // --- FIX: Restored the chart rendering logic ---
+            const dailySalesCtx = document.getElementById('dailySalesChart').getContext('2d');
+            new Chart(dailySalesCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['週一', '週二', '週三', '週四', '週五', '週六', '週日'],
+                    datasets: [
+                        {
+                            label: '銷售額',
+                            data: [12050, 13200, 9800, 15400, 18300, 22100, 19700],
+                            backgroundColor: '#4f46e5',
+                            borderRadius: 6,
+                        },
+                        {
+                            label: '利潤',
+                            data: [3500, 3900, 2800, 4500, 5400, 6800, 5900],
+                            backgroundColor: '#10b981',
+                            borderRadius: 6,
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { ticks: { callback: (value) => 'NT$' + (value / 1000) + 'k' } },
+                        x: { grid: { display: false } }
+                    },
+                    plugins: {
+                        legend: { position: 'top', align: 'end' },
+                        tooltip: { mode: 'index', intersect: false }
+                    }
+                }
+            });
+
+            const profitCategoryCtx = document.getElementById('profitCategoryChart').getContext('2d');
+            new Chart(profitCategoryCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['潮流球鞋', '美妝保養', '服飾配件'],
+                    datasets: [{
+                        data: [11295, 9789, 4016], // Profit values
+                        backgroundColor: ['#3b82f6', '#6366f1', '#14b8a6'],
+                        hoverOffset: 4,
+                        borderWidth: 0,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { padding: 20, usePointStyle: true, pointStyle: 'circle' } },
+                        tooltip: {
+                             callbacks: {
+                                label: (context) => {
+                                    let label = context.label || '';
+                                    if (label) { label += ': '; }
+                                    if (context.parsed !== null) {
+                                        label += new Intl.NumberFormat('zh-TW', { style: 'currency', currency: 'TWD', minimumFractionDigits: 0 }).format(context.parsed);
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
         });
     </script>
 </body>

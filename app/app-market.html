@@ -72,7 +72,7 @@
                 <div id="analyze-btn-loader" class="loader hidden"></div>
             </button>
         </div>
-         <p class="text-xs text-slate-400 mt-2 text-center">我們透過安全的 Puter.js 服務提供 AI 功能，首次使用可能需要您登入或授權。</p>
+        <p class="text-xs text-slate-400 mt-2 text-center">我們透過安全的 Puter.js 服務提供 AI 功能，首次使用可能需要您登入或授權。</p>
         
         <div id="results-container" class="mt-8 hidden">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -364,6 +364,7 @@
                     - 關鍵字: "${keyword}"
                     - 時間範圍: 過去 ${timeRangeDays} 天
                     - 目標市場: 台灣
+                    - 當前日期: 2025年7月1日
 
                     請嚴格依照以下 JSON 格式回傳您的分析結果。不要輸出除了 JSON 物件本身以外的任何文字、註解、或 markdown 語法 (例如 \`\`\`json)。
                     您的回傳內容必須是一個可以直接被 JSON.parse() 解析的字串。
@@ -383,7 +384,7 @@
                         throw new Error("AI 未能提供有效的分析結果。");
                     }
                     
-                    let jsonString = response.message.content;
+                    let jsonString = response.message.content.trim();
                     const jsonMatch = jsonString.match(/```json\n([\s\S]*?)\n```/);
                     if (jsonMatch && jsonMatch[1]) {
                         jsonString = jsonMatch[1];
@@ -404,7 +405,7 @@
 
                 } catch (error) {
                     console.error("Puter.js API call failed:", error);
-                    errorStateDiv.innerHTML = `<p>AI 分析失敗！</p><p class="text-sm text-slate-500 mt-2">${error.message}</p>`;
+                    errorStateDiv.innerHTML = `<p><b>AI 分析失敗！</b></p><p class="text-sm text-slate-500 mt-2">${error.message}</p>`;
                     loadingStateDiv.classList.add('hidden');
                     errorStateDiv.classList.remove('hidden');
                 } finally {
@@ -415,7 +416,19 @@
                 }
             }
 
+            // Add event listener to the analyze button
             analyzeBtn.addEventListener('click', runAnalysis);
+            
+            // Add event listener to the refresh button (optional, can trigger a new analysis)
+            const refreshBtn = document.getElementById('radar-refresh-btn');
+            if(refreshBtn) {
+                refreshBtn.addEventListener('click', () => {
+                    // To prevent accidental clicks, only re-run if a keyword exists
+                    if(keywordInput.value.trim()) {
+                        runAnalysis();
+                    }
+                });
+            }
         });
     </script>
 </body>

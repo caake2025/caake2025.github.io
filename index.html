@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>避錯寶 (Bitrobo) - AI 告訴你該進多少貨，告別庫存惡夢</title>
+    <title>避錯寶 (Bitrobo) - AI 告訴你該進多少貨 (Puter.js 整合版)</title>
+    
+    <script src="https://js.puter.com/v2/"></script>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,11 +40,21 @@
         .interactive-demo {
             transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
         }
+        .loader {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 3px solid #ffffff;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body class="text-slate-800">
 
-    <!-- Header -->
     <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="text-2xl font-bold gradient-text">避錯寶</a>
@@ -58,7 +71,6 @@
     </header>
 
     <main>
-        <!-- Hero Section -->
         <section class="hero-bg pt-24 pb-20">
             <div class="container mx-auto px-6 text-center">
                 <h1 class="text-4xl md:text-6xl font-black text-slate-900 leading-tight">
@@ -68,29 +80,24 @@
                     告別滯銷惡夢，釋放被套牢的現金流。避錯寶是專為台灣選物店與代購賣家設計的 AI 決策引擎，讓您專注於發展事業，而非煩惱庫存。
                 </p>
             </div>
-            <!-- Interactive Demo -->
             <div class="container mx-auto px-6 mt-12">
                 <div class="interactive-demo max-w-2xl mx-auto bg-white rounded-2xl shadow-2xl p-8">
-                    <h3 class="text-center text-xl font-bold text-slate-800">立即體驗 AI 的威力</h3>
+                    <h3 class="text-center text-xl font-bold text-slate-800">✨ 立即體驗 AI 的威力</h3>
                     <p class="text-center text-sm text-slate-500 mb-6">輸入任何你想分析的商品</p>
                     <div class="flex gap-2">
                         <input id="demo-input" type="text" placeholder="例如：ASICS GEL-KAYANO 14" class="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
-                        <button id="demo-btn" class="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 flex-shrink-0">分析</button>
+                        <button id="demo-btn" class="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 flex-shrink-0 flex items-center justify-center gap-2">
+                            <span id="demo-btn-text">分析</span>
+                            <div id="demo-btn-loader" class="loader hidden"></div>
+                        </button>
                     </div>
                     <div id="demo-result" class="mt-6 hidden">
-                        <p class="text-center text-slate-600">根據市場趨勢與社群聲量分析...</p>
-                        <div class="mt-4 bg-indigo-50 p-6 rounded-xl text-center">
-                            <p class="font-semibold text-indigo-800">AI 建議進貨區間</p>
-                            <p class="text-4xl font-bold text-indigo-600 my-2">15 - 25 <span class="text-2xl font-medium">件</span></p>
-                            <p class="text-sm text-amber-600 font-semibold">風險等級：中</p>
                         </div>
-                        <p class="text-xs text-center text-slate-400 mt-4">想解鎖完整分析？<a href="#" class="underline">免費註冊</a>以查看詳細報告。</p>
-                    </div>
+                    <div id="demo-error" class="mt-4 text-center text-red-500 text-sm hidden"></div>
                 </div>
             </div>
         </section>
 
-        <!-- How it Works Section -->
         <section class="py-24 bg-white">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
@@ -123,7 +130,6 @@
             </div>
         </section>
 
-        <!-- Feature Showcase -->
         <section class="py-24">
             <div class="container mx-auto px-6">
                  <div class="text-center mb-16">
@@ -136,7 +142,6 @@
             </div>
         </section>
 
-        <!-- Social Proof / Testimonials -->
         <section class="py-24 bg-white">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
@@ -174,7 +179,6 @@
             </div>
         </section>
 
-        <!-- Final CTA -->
         <section class="py-24">
             <div class="container mx-auto px-6 text-center">
                 <h2 class="text-4xl md:text-5xl font-bold text-slate-900">準備好迎接零庫存風險的未來了嗎？</h2>
@@ -186,7 +190,6 @@
         </section>
     </main>
 
-    <!-- Footer -->
     <footer class="bg-slate-900 text-slate-400">
         <div class="container mx-auto px-6 py-12">
             <div class="grid md:grid-cols-4 gap-8">
@@ -226,9 +229,98 @@
 
     <script>
         const demoBtn = document.getElementById('demo-btn');
+        const demoInput = document.getElementById('demo-input');
         const demoResult = document.getElementById('demo-result');
-        demoBtn.addEventListener('click', () => {
+        const demoError = document.getElementById('demo-error');
+        const demoBtnText = document.getElementById('demo-btn-text');
+        const demoBtnLoader = document.getElementById('demo-btn-loader');
+
+        async function getAiDemoAnalysis() {
+            const productName = demoInput.value;
+            if (!productName) {
+                demoError.textContent = '請輸入商品名稱。';
+                demoError.classList.remove('hidden');
+                return;
+            }
+
+            // --- UI Loading State ---
+            demoBtn.disabled = true;
+            demoBtnText.classList.add('hidden');
+            demoBtnLoader.classList.remove('hidden');
+            demoResult.classList.add('hidden');
+            demoError.classList.add('hidden');
+
+            // ✅ 步驟 2: 強化 Prompt，明確要求 JSON 格式
+            const prompt = `
+                您是「避錯寶」的 AI 分析師。請根據台灣市場的普遍趨勢，為商品「${productName}」提供一個快速的進貨建議。
+                您的回覆「必須」是純粹的 JSON 格式，不包含任何額外文字或 markdown 符號。
+
+                JSON 格式如下:
+                {
+                  "minStock": number,
+                  "maxStock": number,
+                  "riskLevel": "高" | "中" | "低"
+                }
+            `;
+            
+            // ✅ 步驟 3: 將 fetch 替換為 puter.ai.chat
+            try {
+                const ai_response = await puter.ai.chat(prompt, {
+                    model: 'google/gemini-flash-1.5',
+                    temperature: 0.2
+                });
+
+                const jsonString = ai_response?.message?.content;
+                if (!jsonString) {
+                    throw new Error("AI 回應為空，無法解析。");
+                }
+                
+                // ✅ 步驟 4: 增加解析防護
+                let aiData;
+                try {
+                    aiData = JSON.parse(jsonString);
+                } catch (parseError) {
+                    console.error("無法將 AI 回應解析為 JSON:", jsonString);
+                    throw new Error("AI 回應的格式不是有效的 JSON，請再試一次。");
+                }
+
+                updateDemoUI(aiData);
+
+            } catch (error) {
+                console.error("Puter.js AI call failed:", error);
+                demoError.textContent = `分析失敗：${error.message}。請稍後再試。`;
+                demoError.classList.remove('hidden');
+            } finally {
+                // --- Restore UI State ---
+                demoBtn.disabled = false;
+                demoBtnText.classList.remove('hidden');
+                demoBtnLoader.classList.add('hidden');
+            }
+        }
+
+        function updateDemoUI(aiData) {
+            const { minStock, maxStock, riskLevel } = aiData;
+            let riskColor = 'text-amber-600';
+            if (riskLevel === '低') riskColor = 'text-green-600';
+            if (riskLevel === '高') riskColor = 'text-red-600';
+
+            demoResult.innerHTML = `
+                <p class="text-center text-slate-600">根據市場趨勢與社群聲量分析...</p>
+                <div class="mt-4 bg-indigo-50 p-6 rounded-xl text-center">
+                    <p class="font-semibold text-indigo-800">✨ AI 建議進貨區間</p>
+                    <p class="text-4xl font-bold text-indigo-600 my-2">${minStock} - ${maxStock} <span class="text-2xl font-medium">件</span></p>
+                    <p class="text-sm font-semibold ${riskColor}">風險等級：${riskLevel}</p>
+                </div>
+                <p class="text-xs text-center text-slate-400 mt-4">想解鎖完整分析？<a href="#" class="underline">免費註冊</a>以查看詳細報告。</p>
+            `;
             demoResult.classList.remove('hidden');
+        }
+
+        demoBtn.addEventListener('click', getAiDemoAnalysis);
+        demoInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                getAiDemoAnalysis();
+            }
         });
     </script>
 </body>

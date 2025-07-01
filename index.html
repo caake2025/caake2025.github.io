@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>避錯寶 (Bitrobo) - AI 告訴你該進多少貨 (Puter.js 整合版)</title>
-    
-    <script src="https://js.puter.com/v2/"></script>
+    <title>避錯寶 (Bitrobo) - AI 告訴你該進多少貨</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://js.puter.com/v2/"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -59,13 +58,13 @@
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="index.html" class="text-2xl font-bold gradient-text">避錯寶</a>
             <div class="hidden md:flex items-center space-x-6">
-                <a href="features.html" class="text-slate-600 hover:text-indigo-600">功能介紹</a>
-                <a href="pricing.html" class="text-slate-600 hover:text-indigo-600">方案與定價</a>
-                <a href="blog.html" class="text-slate-600 hover:text-indigo-600">資源部落格</a>
+                <a href="#features" class="text-slate-600 hover:text-indigo-600">功能介紹</a>
+                <a href="#pricing" class="text-slate-600 hover:text-indigo-600">方案與定價</a>
+                <a href="#blog" class="text-slate-600 hover:text-indigo-600">資源部落格</a>
             </div>
             <div class="flex items-center space-x-4">
-                <a href="auth.html" class="text-slate-600 hover:text-indigo-600">登入</a>
-                <a href="auth.html" class="bg-indigo-600 text-white px-5 py-2 rounded-full font-semibold hover:bg-indigo-700 cta-button">免費開始使用</a>
+                <a href="#login" class="text-slate-600 hover:text-indigo-600">登入</a>
+                <a href="#signup" class="bg-indigo-600 text-white px-5 py-2 rounded-full font-semibold hover:bg-indigo-700 cta-button">免費開始使用</a>
             </div>
         </nav>
     </header>
@@ -91,6 +90,7 @@
                             <div id="demo-btn-loader" class="loader hidden"></div>
                         </button>
                     </div>
+                    <p class="text-xs text-slate-400 mt-2 text-center">我們透過安全的 Puter.js 服務提供 AI 功能，首次使用可能需要您登入或授權。</p>
                     <div id="demo-result" class="mt-6 hidden">
                         </div>
                     <div id="demo-error" class="mt-4 text-center text-red-500 text-sm hidden"></div>
@@ -98,7 +98,7 @@
             </div>
         </section>
 
-        <section class="py-24 bg-white">
+        <section id="features" class="py-24 bg-white">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl md:text-4xl font-bold text-slate-900">事業成長的三個簡單步驟</h2>
@@ -135,14 +135,14 @@
                  <div class="text-center mb-16">
                     <h2 class="text-3xl md:text-4xl font-bold text-slate-900">一個強大、直觀的作戰指揮中心</h2>
                     <p class="mt-4 text-lg text-slate-600">我們將所有複雜數據，轉化為您看得懂的洞察。</p>
-                </div>
-                <div class="relative">
-                    <img src="https://storage.googleapis.com/gemini-prod-us-west1-assets/bitrobo_app_dashboard_showcase.png" alt="避錯寶儀表板" class="rounded-2xl shadow-2xl">
-                </div>
+                 </div>
+                 <div class="relative">
+                     <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="避錯寶儀表板" class="rounded-2xl shadow-2xl">
+                 </div>
             </div>
         </section>
 
-        <section class="py-24 bg-white">
+        <section id="pricing" class="py-24 bg-white">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl md:text-4xl font-bold text-slate-900">聽聽頂尖賣家怎麼說</h2>
@@ -179,18 +179,18 @@
             </div>
         </section>
 
-        <section class="py-24">
+        <section id="signup" class="py-24">
             <div class="container mx-auto px-6 text-center">
                 <h2 class="text-4xl md:text-5xl font-bold text-slate-900">準備好迎接零庫存風險的未來了嗎？</h2>
                 <p class="mt-6 text-lg text-slate-600">立即註冊，永久免費使用智慧庫存管理功能。無須綁定信用卡。</p>
                 <div class="mt-8">
-                    <a href="auth.html" class="bg-indigo-600 text-white px-10 py-5 rounded-full font-bold text-xl hover:bg-indigo-700 cta-button">立即註冊免費帳號</a>
+                    <a href="#signup-form" class="bg-indigo-600 text-white px-10 py-5 rounded-full font-bold text-xl hover:bg-indigo-700 cta-button">立即註冊免費帳號</a>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="bg-slate-900 text-slate-400">
+    <footer id="blog" class="bg-slate-900 text-slate-400">
         <div class="container mx-auto px-6 py-12">
             <div class="grid md:grid-cols-4 gap-8">
                 <div>
@@ -200,16 +200,16 @@
                 <div>
                     <h4 class="font-semibold text-white mb-4">產品</h4>
                     <ul class="space-y-2">
-                        <li><a href="features.html" class="hover:text-white">功能介紹</a></li>
-                        <li><a href="pricing.html" class="hover:text-white">方案與定價</a></li>
+                        <li><a href="#features" class="hover:text-white">功能介紹</a></li>
+                        <li><a href="#pricing" class="hover:text-white">方案與定價</a></li>
                         <li><a href="#" class="hover:text-white">成功案例</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="font-semibold text-white mb-4">資源</h4>
                     <ul class="space-y-2">
-                        <li><a href="blog.html" class="hover:text-white">部落格</a></li>
-                        <li><a href="help.html" class="hover:text-white">幫助中心</a></li>
+                        <li><a href="#" class="hover:text-white">部落格</a></li>
+                        <li><a href="#" class="hover:text-white">幫助中心</a></li>
                         <li><a href="#" class="hover:text-white">聯絡我們</a></li>
                     </ul>
                 </div>
@@ -249,42 +249,48 @@
             demoBtnLoader.classList.remove('hidden');
             demoResult.classList.add('hidden');
             demoError.classList.add('hidden');
+            
+            // 3. Define schema and build prompt
+            const schema = {
+                type: "OBJECT",
+                properties: {
+                    minStock: { type: "NUMBER", description: "建議的最低進貨數量" },
+                    maxStock: { type: "NUMBER", description: "建議的最高進貨數量" },
+                    riskLevel: { "enum": ["高", "中", "低"], type: "STRING", description: "基於趨勢判斷的風險等級" }
+                },
+                required: ["minStock", "maxStock", "riskLevel"]
+            };
 
             const prompt = `
                 您是「避錯寶」的 AI 分析師。請根據台灣市場的普遍趨勢，為商品「${productName}」提供一個快速的進貨建議。
-                您的回覆「必須」是純粹的 JSON 格式，不包含任何額外文字或 markdown 符號。
+                您的回覆「必須」是純粹的 JSON 格式，不包含任何額外文字、註解或 markdown 符號。
 
-                JSON 格式如下:
-                {
-                  "minStock": number,
-                  "maxStock": number,
-                  "riskLevel": "高" | "中" | "低"
-                }
+                JSON 格式定義如下:
+                ${JSON.stringify(schema, null, 2)}
             `;
             
+            // 4. Make the API call using Puter.js
             try {
-                const ai_response = await puter.ai.chat(prompt, {
-                    model: 'google/gemini-flash-1.5',
-                    temperature: 0.2
+                const response = await puter.ai.chat(prompt, {
+                   model: 'google/gemini-flash-1.5',
+                   stream: false
                 });
 
-                const jsonString = ai_response?.message?.content;
-                if (!jsonString) {
-                    throw new Error("AI 回應為空，無法解析。");
+                if (!response.message || !response.message.content) {
+                    throw new Error("AI 未能提供有效的分析結果。");
                 }
                 
-                let aiData;
-                try {
-                    aiData = JSON.parse(jsonString);
-                } catch (parseError) {
-                    console.error("無法將 AI 回應解析為 JSON:", jsonString);
-                    throw new Error("AI 回應的格式不是有效的 JSON，請再試一次。");
+                let jsonString = response.message.content.trim();
+                const jsonMatch = jsonString.match(/```json\n([\s\S]*?)\n```/);
+                if (jsonMatch && jsonMatch[1]) {
+                    jsonString = jsonMatch[1];
                 }
 
+                const aiData = JSON.parse(jsonString);
                 updateDemoUI(aiData);
 
             } catch (error) {
-                console.error("Puter.js AI call failed:", error);
+                console.error("Puter.js API call failed:", error);
                 demoError.textContent = `分析失敗：${error.message}。請稍後再試。`;
                 demoError.classList.remove('hidden');
             } finally {
@@ -308,7 +314,7 @@
                     <p class="text-4xl font-bold text-indigo-600 my-2">${minStock} - ${maxStock} <span class="text-2xl font-medium">件</span></p>
                     <p class="text-sm font-semibold ${riskColor}">風險等級：${riskLevel}</p>
                 </div>
-                <p class="text-xs text-center text-slate-400 mt-4">想解鎖完整分析？<a href="auth.html" class="underline">免費註冊</a>以查看詳細報告。</p>
+                <p class="text-xs text-center text-slate-400 mt-4">想解鎖完整分析？<a href="#signup" class="underline">免費註冊</a>以查看詳細報告。</p>
             `;
             demoResult.classList.remove('hidden');
         }

@@ -57,15 +57,15 @@
 
     <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold gradient-text">避錯寶</a>
+            <a href="index.html" class="text-2xl font-bold gradient-text">避錯寶</a>
             <div class="hidden md:flex items-center space-x-6">
-                <a href="#" class="text-slate-600 hover:text-indigo-600">功能介紹</a>
-                <a href="#" class="text-slate-600 hover:text-indigo-600">方案與定價</a>
-                <a href="#" class="text-slate-600 hover:text-indigo-600">資源部落格</a>
+                <a href="features.html" class="text-slate-600 hover:text-indigo-600">功能介紹</a>
+                <a href="pricing.html" class="text-slate-600 hover:text-indigo-600">方案與定價</a>
+                <a href="blog.html" class="text-slate-600 hover:text-indigo-600">資源部落格</a>
             </div>
             <div class="flex items-center space-x-4">
-                <a href="#" class="text-slate-600 hover:text-indigo-600">登入</a>
-                <a href="#" class="bg-indigo-600 text-white px-5 py-2 rounded-full font-semibold hover:bg-indigo-700 cta-button">免費開始使用</a>
+                <a href="auth.html" class="text-slate-600 hover:text-indigo-600">登入</a>
+                <a href="auth.html" class="bg-indigo-600 text-white px-5 py-2 rounded-full font-semibold hover:bg-indigo-700 cta-button">免費開始使用</a>
             </div>
         </nav>
     </header>
@@ -184,7 +184,7 @@
                 <h2 class="text-4xl md:text-5xl font-bold text-slate-900">準備好迎接零庫存風險的未來了嗎？</h2>
                 <p class="mt-6 text-lg text-slate-600">立即註冊，永久免費使用智慧庫存管理功能。無須綁定信用卡。</p>
                 <div class="mt-8">
-                    <a href="#" class="bg-indigo-600 text-white px-10 py-5 rounded-full font-bold text-xl hover:bg-indigo-700 cta-button">立即註冊免費帳號</a>
+                    <a href="auth.html" class="bg-indigo-600 text-white px-10 py-5 rounded-full font-bold text-xl hover:bg-indigo-700 cta-button">立即註冊免費帳號</a>
                 </div>
             </div>
         </section>
@@ -200,16 +200,16 @@
                 <div>
                     <h4 class="font-semibold text-white mb-4">產品</h4>
                     <ul class="space-y-2">
-                        <li><a href="#" class="hover:text-white">功能介紹</a></li>
-                        <li><a href="#" class="hover:text-white">方案與定價</a></li>
+                        <li><a href="features.html" class="hover:text-white">功能介紹</a></li>
+                        <li><a href="pricing.html" class="hover:text-white">方案與定價</a></li>
                         <li><a href="#" class="hover:text-white">成功案例</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="font-semibold text-white mb-4">資源</h4>
                     <ul class="space-y-2">
-                        <li><a href="#" class="hover:text-white">部落格</a></li>
-                        <li><a href="#" class="hover:text-white">幫助中心</a></li>
+                        <li><a href="blog.html" class="hover:text-white">部落格</a></li>
+                        <li><a href="help.html" class="hover:text-white">幫助中心</a></li>
                         <li><a href="#" class="hover:text-white">聯絡我們</a></li>
                     </ul>
                 </div>
@@ -250,7 +250,6 @@
             demoResult.classList.add('hidden');
             demoError.classList.add('hidden');
 
-            // ✅ 步驟 2: 強化 Prompt，明確要求 JSON 格式
             const prompt = `
                 您是「避錯寶」的 AI 分析師。請根據台灣市場的普遍趨勢，為商品「${productName}」提供一個快速的進貨建議。
                 您的回覆「必須」是純粹的 JSON 格式，不包含任何額外文字或 markdown 符號。
@@ -263,7 +262,6 @@
                 }
             `;
             
-            // ✅ 步驟 3: 將 fetch 替換為 puter.ai.chat
             try {
                 const ai_response = await puter.ai.chat(prompt, {
                     model: 'google/gemini-flash-1.5',
@@ -275,7 +273,6 @@
                     throw new Error("AI 回應為空，無法解析。");
                 }
                 
-                // ✅ 步驟 4: 增加解析防護
                 let aiData;
                 try {
                     aiData = JSON.parse(jsonString);
@@ -311,7 +308,7 @@
                     <p class="text-4xl font-bold text-indigo-600 my-2">${minStock} - ${maxStock} <span class="text-2xl font-medium">件</span></p>
                     <p class="text-sm font-semibold ${riskColor}">風險等級：${riskLevel}</p>
                 </div>
-                <p class="text-xs text-center text-slate-400 mt-4">想解鎖完整分析？<a href="#" class="underline">免費註冊</a>以查看詳細報告。</p>
+                <p class="text-xs text-center text-slate-400 mt-4">想解鎖完整分析？<a href="auth.html" class="underline">免費註冊</a>以查看詳細報告。</p>
             `;
             demoResult.classList.remove('hidden');
         }

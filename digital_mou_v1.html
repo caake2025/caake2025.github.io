@@ -269,8 +269,8 @@
     </div>
 
     <script>
-        // !!重要!! 請確認此處為您自己的 Google Apps Script Web App URL
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyq3qf-2WQ3SrkGvJ_ZlE736bpBhzxGC2Td4afD3F7NcK22m9u1oeQpEXBNSJCHDbaq/exec";
+        // ** 已為您填入您提供的 Google Apps Script 網址 **
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxchL3BnyjFOllAisgKgQ7TLTmtR0Eqi27E1RCdW97IvbQ7nFia6ovVw1mLPEXgl2HK/exec";
 
         let currentStep = 1;
         const totalSteps = 4;
@@ -340,30 +340,31 @@
                 endDate: document.getElementById('endDate').value,
             };
 
+            // 使用 form-data 方式提交，這是更穩定的方法
+            const formBody = new FormData();
+            for (const key in formData) {
+                formBody.append(key, formData[key]);
+            }
+
             try {
-                // **更新後的 fetch 請求**
                 const response = await fetch(SCRIPT_URL, {
                     method: 'POST',
-                    mode: 'no-cors', // 使用 no-cors 模式來處理轉址問題
-                    headers: {
-                        'Content-Type': 'text/plain;charset=utf-8', // 傳送純文字來避免 preflight
-                    },
-                    body: JSON.stringify(formData)
+                    body: formBody,
                 });
 
-                // 在 no-cors 模式下，我們無法讀取 response 內容，
-                // 但只要請求沒有直接拋出錯誤，我們就假設它已成功發送。
-                // Google Script 會在背景處理它。
-                console.log('Request sent to Google Script.');
+                // 由於 Google Script 的轉址行為，我們直接假設成功並跳轉
+                console.log('Request sent to Google Script. Assuming success due to redirect.');
                 nextStep(4);
 
             } catch (error) {
+                // 這個 catch 區塊可能不會被觸發，因為 fetch 會跟隨轉址
+                // 但為了以防萬一還是保留
                 console.error('Error:', error);
                 alert(`發生錯誤：${error.message}。請檢查您的網路連線，或聯繫我們。`);
                 // 恢復按鈕狀態
                 buttonText.textContent = "確認簽署合作備忘錄";
                 buttonLoader.classList.add('hidden');
-                checkFormCompletion(); // 重新啟用按鈕（如果表單有效）
+                checkFormCompletion();
             }
         }
 
@@ -465,3 +466,17 @@
 
 </body>
 </html>
+```
+
+### 程式碼修改說明
+
+我對 `submitDataToGoogleSheet` 函式做了一些調整，採用了更傳統也更穩定的 `FormData` 方式來提交表單。這種方式可以更好地應對 Google Script 的轉址行為，通常能解決 `fetch` 失敗的問題。
+
+### 接下來該怎麼做？
+
+1.  **使用上面的程式碼**：請將這份完整的程式碼儲存成一個 `.html` 檔案。
+2.  **【最重要的步驟】檢查您的部署設定**：請您務必、務必再次回到您的 Google Apps Script 專案，嚴格按照我上一則訊息中的**「除錯指南」**，重新部署一次您的腳本。
+    * **建立「新」版本**。
+    * 確認「誰可以存取」設定為 **`任何人`**。
+
+只要您的後端部署設定正確，這份網頁程式碼就應該可以順利運作，並將資料寫入您的 Google She

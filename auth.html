@@ -31,12 +31,26 @@
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
+        .fade-out {
+            animation: fadeOut 0.5s forwards;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s forwards;
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; visibility: hidden; }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; visibility: visible; }
+        }
     </style>
 </head>
 <body class="auth-bg">
 
     <div class="min-h-screen flex items-center justify-center p-4">
-        <div class="w-full max-w-4xl mx-auto grid md:grid-cols-2 rounded-2xl shadow-2xl overflow-hidden">
+        <div id="auth-container" class="w-full max-w-4xl mx-auto grid md:grid-cols-2 rounded-2xl shadow-2xl overflow-hidden">
             
             <!-- Left Panel: Brand -->
             <div class="hidden md:flex flex-col justify-center p-12 bg-slate-900 text-white">
@@ -72,15 +86,16 @@
                         <div class="flex-grow border-t border-slate-300"></div>
                     </div>
 
-                    <form class="space-y-4">
+                    <form id="login-form-element" class="space-y-4">
                         <div>
                             <label for="login-email" class="font-medium text-slate-700">Email</label>
-                            <input type="email" id="login-email" class="mt-1 w-full p-3 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+                            <input type="email" id="login-email" value="test@bitrobo.com" class="mt-1 w-full p-3 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
                         </div>
                         <div>
                             <label for="login-password" class="font-medium text-slate-700">密碼</label>
-                            <input type="password" id="login-password" class="mt-1 w-full p-3 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+                            <input type="password" id="login-password" value="password123" class="mt-1 w-full p-3 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
                         </div>
+                        <div id="login-error" class="text-red-500 text-sm hidden">帳號或密碼錯誤</div>
                         <div class="text-right">
                             <a href="#" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">忘記密碼？</a>
                         </div>
@@ -134,25 +149,80 @@
                 </div>
             </div>
         </div>
+
+        <!-- Hidden Dashboard for successful login -->
+        <div id="dashboard" class="hidden w-full max-w-4xl mx-auto text-center p-12 bg-white rounded-2xl shadow-2xl">
+            <h1 class="text-4xl font-bold gradient-text">登入成功！</h1>
+            <p class="mt-4 text-xl text-slate-600">歡迎來到避錯寶儀表板。</p>
+            <p class="mt-2 text-slate-500">這裡是您未來查看 AI 分析報告與管理庫存的地方。</p>
+            <button id="logout-button" class="mt-8 bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 transition-colors">登出</button>
+        </div>
     </div>
 
     <script>
-        const loginForm = document.getElementById('login-form');
-        const signupForm = document.getElementById('signup-form');
+        const loginFormContainer = document.getElementById('login-form');
+        const signupFormContainer = document.getElementById('signup-form');
         const showSignupBtn = document.getElementById('show-signup');
         const showLoginBtn = document.getElementById('show-login');
+        
+        const loginForm = document.getElementById('login-form-element');
+        const loginEmailInput = document.getElementById('login-email');
+        const loginPasswordInput = document.getElementById('login-password');
+        const loginError = document.getElementById('login-error');
 
+        const authContainer = document.getElementById('auth-container');
+        const dashboard = document.getElementById('dashboard');
+        const logoutButton = document.getElementById('logout-button');
+
+        // --- Toggle between Login and Signup forms ---
         showSignupBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            loginForm.classList.add('hidden');
-            signupForm.classList.remove('hidden');
+            loginFormContainer.classList.add('hidden');
+            signupFormContainer.classList.remove('hidden');
         });
 
         showLoginBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            signupForm.classList.add('hidden');
-            loginForm.classList.remove('hidden');
+            signupFormContainer.classList.add('hidden');
+            loginFormContainer.classList.remove('hidden');
         });
+
+        // --- Handle Fake Login ---
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // Prevent actual form submission
+            
+            const email = loginEmailInput.value;
+            const password = loginPasswordInput.value;
+
+            // Check for fake credentials
+            if (email === 'test@bitrobo.com' && password === 'password123') {
+                // Success
+                loginError.classList.add('hidden');
+                authContainer.classList.add('fade-out');
+                
+                setTimeout(() => {
+                    dashboard.classList.remove('hidden');
+                    dashboard.classList.add('fade-in');
+                }, 500);
+
+            } else {
+                // Failure
+                loginError.classList.remove('hidden');
+            }
+        });
+
+        // --- Handle Logout ---
+        logoutButton.addEventListener('click', () => {
+            dashboard.classList.add('fade-out');
+            
+            setTimeout(() => {
+                dashboard.classList.add('hidden');
+                authContainer.classList.remove('hidden');
+                authContainer.classList.remove('fade-out');
+                authContainer.classList.add('fade-in');
+            }, 500);
+        });
+
     </script>
 
 </body>

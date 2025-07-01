@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConsumerVerse & 合作夥伴 | 合作備忘錄</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+        }
+        .progress-bar-fill {
+            transition: width 0.5s ease-in-out;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+        }
+        .accordion-content.open {
+            max-height: 1000px; /* Adjust as needed */
+            transition: max-height 1s ease-in, padding 0.5s ease-in;
+        }
+        .btn-disabled {
+            background-color: #9ca3af;
+            cursor: not-allowed;
+        }
+        .loader {
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #3498db;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <div class="container mx-auto max-w-4xl p-4 sm:p-8">
+
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <div class="flex justify-center items-center gap-4 mb-2">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-blue-600">
+                    <path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 7L12 12L22 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 12V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M17 4.5L7 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">避錯寶 Bitrobo</h1>
+            </div>
+            <p class="text-gray-600">合作備忘錄 (Memorandum of Understanding)</p>
+        </header>
+
+        <!-- Progress Bar -->
+        <div class="w-full mb-10">
+            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                <div id="progressBar" class="bg-blue-600 h-2.5 rounded-full progress-bar-fill" style="width: 10%"></div>
+            </div>
+            <div class="flex justify-between mt-2 text-xs sm:text-sm text-gray-500">
+                <span id="step-label-1" class="font-semibold text-blue-600">合作摘要</span>
+                <span id="step-label-2">條款細節</span>
+                <span id="step-label-3">資訊確認</span>
+                <span id="step-label-4">完成簽署</span>
+            </div>
+        </div>
+
+        <main class="bg-white p-6 sm:p-10 rounded-2xl shadow-lg">
+
+            <!-- Step 1: Welcome & Summary -->
+            <section id="step-1">
+                <h2 class="text-xl sm:text-2xl font-bold mb-2">歡迎！讓我們攜手開啟數據驅動的銷售新時代</h2>
+                <p class="text-gray-600 mb-8">這是一份我們雙方合作的備忘錄，旨在透過「避錯寶 Bitrobo」的免費試用計畫，共同創造雙贏。以下是本次合作的三大重點：</p>
+
+                <div class="grid md:grid-cols-3 gap-6 text-center">
+                    <div class="bg-blue-50 p-6 rounded-xl border border-blue-200">
+                        <div class="mx-auto bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">您將獲得 (You Get)</h3>
+                        <p class="text-sm text-gray-600">免費使用「市場分析」與「庫存統整」兩大核心模組，精準掌握趨勢、告別庫存煩惱。</p>
+                    </div>
+                    <div class="bg-green-50 p-6 rounded-xl border border-green-200">
+                        <div class="mx-auto bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">我們需要 (We Ask)</h3>
+                        <p class="text-sm text-gray-600">您授權「匿名化」與「聚合化」後的營運數據，幫助我們訓練更聰明的 AI 模型，回饋給所有商家。</p>
+                    </div>
+                    <div class="bg-gray-100 p-6 rounded-xl border border-gray-200">
+                        <div class="mx-auto bg-gray-200 rounded-full w-16 h-16 flex items-center justify-center mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">安全承諾 (Our Promise)</h3>
+                        <p class="text-sm text-gray-600">我們絕不洩漏任何可識別您商業機密的個體數據，並以最高標準保障您的資料安全。</p>
+                    </div>
+                </div>
+                <div class="text-right mt-10">
+                    <button onclick="nextStep(2)" class="bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors">我了解了，查看詳細條款</button>
+                </div>
+            </section>
+
+            <!-- Step 2: Detailed Terms -->
+            <section id="step-2" class="hidden">
+                <h2 class="text-xl sm:text-2xl font-bold mb-2">合作備忘錄詳細條款</h2>
+                <p class="text-gray-600 mb-8">以下是完整的合作條款。我們為每一條都附上了「白話文小幫手」，幫助您快速理解。</p>
+                
+                <div id="accordion" class="space-y-4">
+                    <!-- Accordion Items here... (same as before) -->
+                     <div class="border border-gray-200 rounded-lg">
+                        <button class="accordion-header w-full flex justify-between items-center p-4 text-left font-semibold">
+                            第一條、合作內容
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                        </button>
+                        <div class="accordion-content px-4 pb-4">
+                            <div class="bg-gray-50 p-3 rounded-md mb-3">
+                                <h4 class="font-bold text-sm text-gray-700">💡 白話文小幫手：</h4>
+                                <p class="text-sm text-gray-600">這一條說明了您能免費試用哪些功能、試用多久，以及為了讓 AI 變聰明，您需要提供哪些「匿名化」後的資料。</p>
+                            </div>
+                            <div class="prose prose-sm max-w-none text-gray-600">
+                                <ol class="list-decimal pl-5">
+                                    <li><b>試用範圍與時程：</b>乙方同意參與本系統之免費試用計畫，試用範圍包含市場分析模組(A)與庫存統整模組(B)。試用期間將於下方資訊確認頁填寫。</li>
+                                    <li><b>模組功能與交付項目：</b>甲方應於試用期間提供乙方穩定之系統存取權限，並提供必要之線上教學與技術支援。</li>
+                                    <li><b>資料交換與使用權限：</b>乙方同意提供匿名化與聚合化處理後之電商營運數據。甲方承諾僅將數據用於訓練 AI 模型、改善產品質量及進行總體市場趨勢分析，絕不洩漏任何可識別乙方獨立商業機密之個體數據。</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border border-gray-200 rounded-lg">
+                        <button class="accordion-header w-full flex justify-between items-center p-4 text-left font-semibold">
+                            第二、三條、權利義務與保密
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                        </button>
+                        <div class="accordion-content px-4 pb-4">
+                            <div class="bg-gray-50 p-3 rounded-md mb-3">
+                                <h4 class="font-bold text-sm text-gray-700">💡 白話文小幫手：</h4>
+                                <p class="text-sm text-gray-600">這裡規定了我們雙方的基本責任，最重要的就是：我們替您保守商業機密，您也替我們保守產品機密，大家互相尊重。</p>
+                            </div>
+                            <div class="prose prose-sm max-w-none text-gray-600">
+                                <p><b>第二條、權利與義務：</b>甲方應確保系統運行及資料安全。乙方應提供真實數據並給予使用回饋。</p>
+                                <p><b>第三條、保密條款：</b>甲乙雙方同意，對於因本合作而知悉或持有之對方任何未公開之資訊，均負保密義務。此義務不因本備忘錄終止或屆滿而失效。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border border-gray-200 rounded-lg">
+                        <button class="accordion-header w-full flex justify-between items-center p-4 text-left font-semibold">
+                            第四條至第八條、其他條款
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                        </button>
+                        <div class="accordion-content px-4 pb-4">
+                            <div class="bg-gray-50 p-3 rounded-md mb-3">
+                                <h4 class="font-bold text-sm text-gray-700">💡 白話文小幫手：</h4>
+                                <p class="text-sm text-gray-600">這部分是標準的法律收尾條款，主要內容包括：試用免費，未來收費會另外談；產品的智慧財產權是我們的；如果真的有爭議，我們在新竹地方法院解決。</p>
+                            </div>
+                            <div class="prose prose-sm max-w-none text-gray-600">
+                                <p><b>第四條、費用：</b>本次試用免費。未來若繼續使用，雙方另訂商業合約。</p>
+                                <p><b>第五條、期間與解約：</b>備忘錄有效期同試用期，任一方可提前三十日書面通知終止。</p>
+                                <p><b>第六條、智慧財產權：</b>本系統之智慧財產權歸屬甲方。</p>
+                                <p><b>第七條、爭議解決：</b>若有爭議，以臺灣新竹地方法院為第一審管轄法院。</p>
+                                <p><b>第八條、其他事項：</b>本備忘錄為合作意向，除保密與智財權條款外，不具強制法律約束力。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-between mt-10">
+                    <button onclick="prevStep(1)" class="bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-lg hover:bg-gray-300 transition-colors">返回摘要</button>
+                    <button onclick="nextStep(3)" class="bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors">我已閱讀並理解所有條款</button>
+                </div>
+            </section>
+
+            <!-- Step 3: Information Confirmation -->
+            <section id="step-3" class="hidden">
+                <h2 class="text-xl sm:text-2xl font-bold mb-2">最後一步：請確認雙方資訊</h2>
+                <p class="text-gray-600 mb-8">請填寫貴公司的資訊並確認試用期間，即可完成簽署。</p>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Party A -->
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="font-bold text-lg mb-4">甲方 (提供方)</h3>
+                        <div class="space-y-3">
+                            <div><span class="font-semibold">公司名稱：</span>ConsumerVerse</div>
+                            <div><span class="font-semibold">統一編號：</span>XXXXXX</div>
+                            <div><span class="font-semibold">代表人：</span>[甲方代表人]</div>
+                            <div><span class="font-semibold">地址：</span>[甲方地址]</div>
+                        </div>
+                    </div>
+                    <!-- Party B -->
+                    <div class="bg-blue-50 p-6 rounded-lg border border-blue-200">
+                        <h3 class="font-bold text-lg mb-4">乙方 (試用方) - 請填寫</h3>
+                        <form id="partyBForm" class="space-y-4">
+                            <div>
+                                <label for="companyName" class="block text-sm font-medium text-gray-700">公司全名</label>
+                                <input type="text" id="companyName" name="companyName" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
+                            </div>
+                            <div>
+                                <label for="taxId" class="block text-sm font-medium text-gray-700">統一編號</label>
+                                <input type="text" id="taxId" name="taxId" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
+                            </div>
+                             <div>
+                                <label for="representative" class="block text-sm font-medium text-gray-700">代表人</label>
+                                <input type="text" id="representative" name="representative" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
+                            </div>
+                             <div>
+                                <label for="address" class="block text-sm font-medium text-gray-700">公司地址</label>
+                                <input type="text" id="address" name="address" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                 <div class="mt-8 bg-gray-50 p-6 rounded-lg">
+                     <h3 class="font-bold text-lg mb-4">試用期間</h3>
+                     <div class="grid sm:grid-cols-2 gap-4 items-center">
+                        <div>
+                            <label for="startDate" class="block text-sm font-medium text-gray-700">開始日期</label>
+                            <input type="date" id="startDate" name="startDate" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
+                        </div>
+                        <div>
+                            <label for="endDate" class="block text-sm font-medium text-gray-700">結束日期</label>
+                            <input type="date" id="endDate" name="endDate" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
+                        </div>
+                     </div>
+                 </div>
+
+                <div class="mt-8 border-t pt-6">
+                    <div class="flex items-start">
+                        <input id="agreeCheckbox" type="checkbox" class="h-4 w-4 text-blue-600 border-gray-300 rounded mt-1 focus:ring-blue-500">
+                        <label for="agreeCheckbox" class="ml-3 block text-sm text-gray-700">
+                            本人（即代表人）已詳閱、理解並同意上述所有條款，並確認所填寫之乙方資訊及試用期間無誤，願以此作為雙方合作之依據。
+                        </label>
+                    </div>
+                </div>
+
+                <div class="flex justify-between mt-10">
+                    <button onclick="prevStep(2)" class="bg-gray-200 text-gray-800 font-bold py-3 px-6 rounded-lg hover:bg-gray-300 transition-colors">返回條款</button>
+                    <button id="signButton" onclick="handleSignClick()" class="bg-blue-600 text-white font-bold py-3 px-6 rounded-lg btn-disabled flex items-center justify-center gap-2" disabled>
+                        <span id="signButtonText">確認簽署合作備忘錄</span>
+                        <div id="signButtonLoader" class="loader hidden"></div>
+                    </button>
+                </div>
+            </section>
+            
+            <!-- Step 4: Success -->
+            <section id="step-4" class="hidden text-center">
+                 <div class="mx-auto bg-green-100 rounded-full w-24 h-24 flex items-center justify-center mb-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-bold mb-2">簽署完成，合作愉快！</h2>
+                <p class="text-gray-600 mb-4">我們已收到您的簽署，系統將在 24 小時內為您開通帳號。</p>
+                <p class="text-gray-600 mb-8">一份已簽署的備忘錄副本已寄送至您的電子信箱。期待與您共創佳績！</p>
+                <div id="summary" class="text-left bg-gray-50 p-6 rounded-lg max-w-md mx-auto"></div>
+            </section>
+
+        </main>
+        
+        <footer class="text-center mt-8 text-sm text-gray-500">
+            <p>&copy; <span id="year"></span> ConsumerVerse. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // !!重要!! 請將此處替換為您自己的 Google Apps Script Web App URL
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyq3qf-2WQ3SrkGvJ_ZlE736bpBhzxGC2Td4afD3F7NcK22m9u1oeQpEXBNSJCHDbaq/exec";
+
+        let currentStep = 1;
+        const totalSteps = 4;
+
+        function updateProgressBar() {
+            const progress = ((currentStep - 1) / (totalSteps - 1)) * 90 + 10;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+            
+            for (let i = 1; i <= totalSteps; i++) {
+                const label = document.getElementById(`step-label-${i}`);
+                if (i <= currentStep) {
+                    label.classList.add('font-semibold', 'text-blue-600');
+                } else {
+                    label.classList.remove('font-semibold', 'text-blue-600');
+                }
+            }
+        }
+
+        function showStep(stepNumber) {
+            for (let i = 1; i <= totalSteps; i++) {
+                document.getElementById(`step-${i}`).classList.add('hidden');
+            }
+            document.getElementById(`step-${stepNumber}`).classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function nextStep(step) {
+            if (step > currentStep) {
+                currentStep = step;
+                showStep(currentStep);
+                updateProgressBar();
+            }
+        }
+
+        function prevStep(step) {
+            if (step < currentStep) {
+                currentStep = step;
+                showStep(currentStep);
+                updateProgressBar();
+            }
+        }
+
+        function handleSignClick() {
+            if (!validateForm()) return;
+            
+            displaySummary();
+            submitDataToGoogleSheet();
+        }
+
+        async function submitDataToGoogleSheet() {
+            const signButton = document.getElementById('signButton');
+            const buttonText = document.getElementById('signButtonText');
+            const buttonLoader = document.getElementById('signButtonLoader');
+
+            // 顯示載入動畫
+            buttonText.textContent = "傳送中...";
+            buttonLoader.classList.remove('hidden');
+            signButton.disabled = true;
+
+            const formData = {
+                timestamp: new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' }),
+                companyName: document.getElementById('companyName').value,
+                taxId: document.getElementById('taxId').value,
+                representative: document.getElementById('representative').value,
+                address: document.getElementById('address').value,
+                startDate: document.getElementById('startDate').value,
+                endDate: document.getElementById('endDate').value,
+            };
+
+            try {
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'cors',
+                    cache: 'no-cache',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                    redirect: 'follow' 
+                });
+                
+                const result = await response.json();
+
+                if (result.status === 'success') {
+                    // 成功，前往下一步
+                    nextStep(4);
+                } else {
+                    // 失敗，顯示錯誤訊息
+                    throw new Error(result.message || '提交失敗，請稍後再試。');
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+                alert(`發生錯誤：${error.message}`);
+                // 恢復按鈕狀態
+                buttonText.textContent = "確認簽署合作備忘錄";
+                buttonLoader.classList.add('hidden');
+                checkFormCompletion(); // 重新啟用按鈕（如果表單有效）
+            }
+        }
+
+        function validateForm() {
+            const form = document.getElementById('partyBForm');
+            const startDate = document.getElementById('startDate');
+            const endDate = document.getElementById('endDate');
+            let isValid = true;
+
+            form.querySelectorAll('input[required]').forEach(input => {
+                if (!input.value.trim()) {
+                    input.classList.add('border-red-500');
+                    isValid = false;
+                } else {
+                    input.classList.remove('border-red-500');
+                }
+            });
+            
+            if (!startDate.value) {
+                startDate.classList.add('border-red-500');
+                isValid = false;
+            } else {
+                startDate.classList.remove('border-red-500');
+            }
+            if (!endDate.value) {
+                endDate.classList.add('border-red-500');
+                isValid = false;
+            } else {
+                endDate.classList.remove('border-red-500');
+            }
+            
+            if (!isValid) {
+                alert('請填寫所有標示為必填的欄位！');
+            }
+            
+            return isValid;
+        }
+
+        function displaySummary() {
+            const companyName = document.getElementById('companyName').value;
+            const taxId = document.getElementById('taxId').value;
+            const representative = document.getElementById('representative').value;
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            
+            const summaryDiv = document.getElementById('summary');
+            summaryDiv.innerHTML = `
+                <h4 class="font-bold mb-3 text-lg">簽署資訊摘要</h4>
+                <p class="mb-2"><strong>公司名稱：</strong> ${companyName}</p>
+                <p class="mb-2"><strong>統一編號：</strong> ${taxId}</p>
+                <p class="mb-2"><strong>代表人：</strong> ${representative}</p>
+                <p><strong>試用期間：</strong> ${startDate} 至 ${endDate}</p>
+            `;
+        }
+        
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                const icon = header.querySelector('svg');
+                content.classList.toggle('open');
+                icon.classList.toggle('rotate-180');
+                if (content.classList.contains('open')) {
+                    content.style.paddingTop = '1rem';
+                } else {
+                    content.style.paddingTop = '0';
+                }
+            });
+        });
+
+        const agreeCheckbox = document.getElementById('agreeCheckbox');
+        const signButton = document.getElementById('signButton');
+        const requiredInputs = document.querySelectorAll('#partyBForm input[required], #startDate, #endDate');
+
+        function checkFormCompletion() {
+            let allFilled = true;
+            requiredInputs.forEach(input => {
+                if (!input.value.trim()) {
+                    allFilled = false;
+                }
+            });
+
+            if (allFilled && agreeCheckbox.checked) {
+                signButton.disabled = false;
+                signButton.classList.remove('btn-disabled');
+            } else {
+                signButton.disabled = true;
+                signButton.classList.add('btn-disabled');
+            }
+        }
+
+        requiredInputs.forEach(input => input.addEventListener('input', checkFormCompletion));
+        agreeCheckbox.addEventListener('change', checkFormCompletion);
+
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        showStep(1);
+        updateProgressBar();
+    </script>
+
+</body>
+</html>

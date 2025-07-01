@@ -114,7 +114,6 @@
                 <p class="text-gray-600 mb-8">以下是完整的合作條款。我們為每一條都附上了「白話文小幫手」，幫助您快速理解。</p>
                 
                 <div id="accordion" class="space-y-4">
-                    <!-- Accordion Items here... (same as before) -->
                      <div class="border border-gray-200 rounded-lg">
                         <button class="accordion-header w-full flex justify-between items-center p-4 text-left font-semibold">
                             第一條、合作內容
@@ -270,8 +269,8 @@
     </div>
 
     <script>
-        // !!重要!! 請將此處替換為您自己的 Google Apps Script Web App URL
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbze5_WbtyXzF64oJheNw4TedXJ2BPYIOQXjmZpIvY0vN4BdA0dYVNM__H5u3Wgsw31m/exec";
+        // !!重要!! 請確認此處為您自己的 Google Apps Script Web App URL
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyq3qf-2WQ3SrkGvJ_ZlE736bpBhzxGC2Td4afD3F7NcK22m9u1oeQpEXBNSJCHDbaq/exec";
 
         let currentStep = 1;
         const totalSteps = 4;
@@ -342,30 +341,25 @@
             };
 
             try {
+                // **更新後的 fetch 請求**
                 const response = await fetch(SCRIPT_URL, {
                     method: 'POST',
-                    mode: 'cors',
-                    cache: 'no-cache',
+                    mode: 'no-cors', // 使用 no-cors 模式來處理轉址問題
                     headers: {
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'text/plain;charset=utf-8', // 傳送純文字來避免 preflight
                     },
-                    body: JSON.stringify(formData),
-                    redirect: 'follow' 
+                    body: JSON.stringify(formData)
                 });
-                
-                const result = await response.json();
 
-                if (result.status === 'success') {
-                    // 成功，前往下一步
-                    nextStep(4);
-                } else {
-                    // 失敗，顯示錯誤訊息
-                    throw new Error(result.message || '提交失敗，請稍後再試。');
-                }
+                // 在 no-cors 模式下，我們無法讀取 response 內容，
+                // 但只要請求沒有直接拋出錯誤，我們就假設它已成功發送。
+                // Google Script 會在背景處理它。
+                console.log('Request sent to Google Script.');
+                nextStep(4);
 
             } catch (error) {
                 console.error('Error:', error);
-                alert(`發生錯誤：${error.message}`);
+                alert(`發生錯誤：${error.message}。請檢查您的網路連線，或聯繫我們。`);
                 // 恢復按鈕狀態
                 buttonText.textContent = "確認簽署合作備忘錄";
                 buttonLoader.classList.add('hidden');

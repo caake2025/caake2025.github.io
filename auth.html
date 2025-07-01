@@ -169,60 +169,54 @@
         const loginEmailInput = document.getElementById('login-email');
         const loginPasswordInput = document.getElementById('login-password');
         const loginError = document.getElementById('login-error');
-
+    
         const authContainer = document.getElementById('auth-container');
-        const dashboard = document.getElementById('dashboard');
-        const logoutButton = document.getElementById('logout-button');
-
-        // --- Toggle between Login and Signup forms ---
+        
+        // 因為要跳轉頁面了，所以不再需要儀表板和登出按鈕的 DOM 元素
+        // const dashboard = document.getElementById('dashboard');
+        // const logoutButton = document.getElementById('logout-button');
+    
+        // --- 切換登入與註冊表單 ---
         showSignupBtn.addEventListener('click', (e) => {
             e.preventDefault();
             loginFormContainer.classList.add('hidden');
             signupFormContainer.classList.remove('hidden');
         });
-
+    
         showLoginBtn.addEventListener('click', (e) => {
             e.preventDefault();
             signupFormContainer.classList.add('hidden');
             loginFormContainer.classList.remove('hidden');
         });
-
-        // --- Handle Fake Login ---
+    
+        // --- 處理假登入 ---
         loginForm.addEventListener('submit', (e) => {
-            e.preventDefault(); // Prevent actual form submission
+            e.preventDefault(); // 防止表單實際提交
             
             const email = loginEmailInput.value;
             const password = loginPasswordInput.value;
-
-            // Check for fake credentials
+    
+            // 檢查假帳號密碼
             if (email === 'test@bitrobo.com' && password === 'password123') {
-                // Success
+                // 成功
                 loginError.classList.add('hidden');
                 authContainer.classList.add('fade-out');
                 
+                // 等待淡出動畫 (0.5秒) 結束後再跳轉頁面
                 setTimeout(() => {
-                    dashboard.classList.remove('hidden');
-                    dashboard.classList.add('fade-in');
+                    window.location.href = '/app/dashboard.html';
                 }, 500);
-
+    
             } else {
-                // Failure
+                // 失敗
                 loginError.classList.remove('hidden');
             }
         });
-
+    
+        // 因為頁面會跳轉，原本的登出邏輯也就不需要了
         // --- Handle Logout ---
-        logoutButton.addEventListener('click', () => {
-            dashboard.classList.add('fade-out');
-            
-            setTimeout(() => {
-                dashboard.classList.add('hidden');
-                authContainer.classList.remove('hidden');
-                authContainer.classList.remove('fade-out');
-                authContainer.classList.add('fade-in');
-            }, 500);
-        });
-
+        // logoutButton.addEventListener('click', () => { ... });
+    
     </script>
 
 </body>

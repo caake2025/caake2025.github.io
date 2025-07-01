@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>功能介紹 - 避錯寶 (Bitrobo)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .gradient-text {
+            background: -webkit-linear-gradient(45deg, #6d28d9, #2563eb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .feature-bg {
+            background-color: #f8fafc;
+            background-image: radial-gradient(#dbeafe 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .cta-button {
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px -10px rgba(99, 102, 241, 0.5);
+        }
+        .feature-card-image {
+            transition: transform 0.5s ease;
+        }
+        .feature-card:hover .feature-card-image {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="text-slate-700">
+
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold gradient-text">避錯寶</a>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#" class="text-indigo-600 font-semibold">功能介紹</a>
+                <a href="#" class="text-slate-600 hover:text-indigo-600">方案與定價</a>
+                <a href="#" class="text-slate-600 hover:text-indigo-600">資源部落格</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="#" class="text-slate-600 hover:text-indigo-600">登入</a>
+                <a href="#" class="bg-indigo-600 text-white px-5 py-2 rounded-full font-semibold hover:bg-indigo-700 cta-button">免費開始使用</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="feature-bg">
+        <!-- Hero Section -->
+        <section class="container mx-auto px-6 pt-24 pb-16 text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900">深入了解避錯寶的<span class="gradient-text">強大功能</span></h1>
+            <p class="mt-4 text-lg text-slate-600 max-w-3xl mx-auto">我們將複雜的數據分析轉化為簡單、可執行的商業洞見，為您的每一步決策護航。</p>
+        </section>
+
+        <!-- Features Sections -->
+        <div class="container mx-auto px-6 py-10 space-y-24">
+
+            <!-- Feature 1: Inventory Management (Module B) -->
+            <section class="feature-card grid md:grid-cols-2 gap-12 items-center">
+                <div class="order-2 md:order-1">
+                    <span class="text-indigo-600 font-semibold">智慧庫存管理 (免費)</span>
+                    <h2 class="mt-2 text-3xl font-bold text-slate-900">一切的起點：告別雜亂的試算表</h2>
+                    <p class="mt-4 text-slate-600">停止在無數個 Excel 檔案中迷失方向。我們的智慧庫存系統是您數據化營運的基礎，而且完全免費。輕鬆匯入、跨平台整合，讓您對所有商品狀況一目了然。</p>
+                    <ul class="mt-6 space-y-3">
+                        <li class="flex items-start"><svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>**一鍵匯入**：支援 Excel, CSV 檔案，無痛轉移現有資料。</span></li>
+                        <li class="flex items-start"><svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>**視覺化儀表板**：自動生成銷售趨勢、庫存價值、週轉率等圖表。</span></li>
+                        <li class="flex items-start"><svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>**跨平台整合**：未來將支援串接蝦皮、Shopify 等主流電商平台。</span></li>
+                    </ul>
+                </div>
+                <div class="order-1 md:order-2">
+                    <img src="https://storage.googleapis.com/gemini-prod-us-west1-assets/bitrobo_feature_inventory.png" alt="智慧庫存管理儀表板" class="rounded-2xl shadow-2xl feature-card-image">
+                </div>
+            </section>
+
+            <!-- Feature 2: Market Analysis (Module A) -->
+            <section class="feature-card grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                     <img src="https://storage.googleapis.com/gemini-prod-us-west1-assets/bitrobo_feature_market.png" alt="市場趨勢分析儀表板" class="rounded-2xl shadow-2xl feature-card-image">
+                </div>
+                <div>
+                    <span class="text-indigo-600 font-semibold">市場趨勢分析</span>
+                    <h2 class="mt-2 text-3xl font-bold text-slate-900">洞察先機：成為市場趨勢的領航者</h2>
+                    <p class="mt-4 text-slate-600">在競爭激烈的市場中，資訊就是力量。我們為您整合社群輿情與關鍵字搜尋趨勢，讓您在競爭對手行動前，就率先發現下一個爆款商機。</p>
+                    <ul class="mt-6 space-y-3">
+                        <li class="flex items-start"><svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>**社群熱點追蹤**：監控 Dcard, PTT, Instagram 上的熱門討論與品牌聲量。</span></li>
+                        <li class="flex items-start"><svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>**關鍵字趨勢**：整合 Google Trends 數據，掌握消費者搜尋行為的變化。</span></li>
+                        <li class="flex items-start"><svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>**新品雷達**：AI 主動發掘潛力新品，提供您選品的靈感。</span></li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Feature 3: AI Recommendation (Module C) -->
+            <section class="feature-card grid md:grid-cols-2 gap-12 items-center">
+                 <div class="order-2 md:order-1">
+                    <span class="text-indigo-600 font-semibold">AI 進貨建議</span>
+                    <h2 class="mt-2 text-3xl font-bold text-slate-900">核心決策引擎：解答「該進多少貨」</h2>
+                    <p class="mt-4 text-slate-600">這不僅是分析，更是答案。避錯寶的核心價值，就是將所有複雜數據轉化為一個簡單、精準的進貨數量區間。從此，您的每一個進貨決策都有 AI 作為最強後盾。</p>
+                    <ul class="mt-6 space-y-3">
+                        <li class="flex items-start"><svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>**精準數量區間**：提供最佳化的高、低點建議，最大化利潤同時最小化風險。</span></li>
+                        <li class="flex items-start"><svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>**量化風險評估**：給予明確的「高、中、低」風險等級，讓您對決策充滿信心。</span></li>
+                        <li class="flex items-start"><svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>**預估投資回報 (ROI)**：在您進貨前，就先估算出這筆投資的潛在回報率。</span></li>
+                    </ul>
+                </div>
+                <div class="order-1 md:order-2">
+                    <img src="https://storage.googleapis.com/gemini-prod-us-west1-assets/bitrobo_dashboard_preview.png" alt="AI 進貨建議儀表板" class="rounded-2xl shadow-2xl feature-card-image">
+                </div>
+            </section>
+        </div>
+
+        <!-- CTA Section -->
+        <section class="py-24">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900">準備好體驗全方位的 AI 賦能了嗎？</h2>
+                <p class="mt-4 text-lg text-slate-600">從管理、分析到決策，讓避錯寶成為您最聰明的生意夥伴。</p>
+                <div class="mt-8">
+                    <a href="#" class="bg-indigo-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-indigo-700 cta-button">立即註冊，免費開始</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">避錯寶</h3>
+                    <p>用數據和 AI，賦能每一位電商賣家。</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white mb-4">產品</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white">功能介紹</a></li>
+                        <li><a href="#" class="hover:text-white">方案與定價</a></li>
+                        <li><a href="#" class="hover:text-white">成功案例</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white mb-4">資源</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white">部落格</a></li>
+                        <li><a href="#" class="hover:text-white">幫助中心</a></li>
+                        <li><a href="#" class="hover:text-white">聯絡我們</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white mb-4">法律</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white">服務條款</a></li>
+                        <li><a href="#" class="hover:text-white">隱私權政策</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-slate-800 pt-8 text-center text-sm">
+                <p>&copy; 2025 Bitrobo Inc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

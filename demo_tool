@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>避錯寶 AI 引擎互動 Demo 工具 (動態預測版)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary-teal: #00C2C8;
+            --accent-yellow: #F4D019;
+            --title-indigo: #1A1A4F;
+            --kpi-green: #234E38;
+            --light-gray-bg: #F8F9FA;
+            --text-dark: #212529;
+            --text-secondary: #6C757D;
+            --white: #FFFFFF;
+            --border-color: #DEE2E6;
+            --danger-red: #DC3545;
+            --success-green: #198754;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: var(--light-gray-bg);
+            color: var(--text-dark);
+        }
+
+        .app-container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 320px;
+            background-color: var(--white);
+            border-right: 1px solid var(--border-color);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--title-indigo);
+            margin-bottom: 30px;
+        }
+        .sidebar-header span {
+            color: var(--primary-teal);
+        }
+
+        .sidebar-nav-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            margin-top: 10px;
+        }
+
+        .use-case-btn {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 10px;
+            border: none;
+            background-color: transparent;
+            border-radius: 12px;
+            font-family: 'Noto Sans TC', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-dark);
+        }
+
+        .use-case-btn:hover {
+            background-color: #e9ecef;
+        }
+
+        .use-case-btn.active {
+            background-color: var(--primary-teal);
+            color: var(--white);
+            box-shadow: 0 4px 10px rgba(0, 194, 200, 0.3);
+        }
+        
+        .use-case-btn .icon {
+            margin-right: 15px;
+            width: 24px;
+            height: 24px;
+        }
+
+        .input-control {
+            margin-bottom: 20px;
+        }
+        .input-control label {
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--title-indigo);
+            display: block;
+            margin-bottom: 8px;
+        }
+        .input-control input[type="range"] {
+            width: 100%;
+            cursor: pointer;
+        }
+        .input-control select {
+            width: 100%;
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            font-family: 'Noto Sans TC', sans-serif;
+            font-size: 14px;
+        }
+        .slider-value {
+            font-weight: 700;
+            color: var(--primary-teal);
+        }
+
+
+        .main-content {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 40px;
+        }
+
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .page-header {
+            margin-bottom: 30px;
+        }
+
+        .page-header h1 {
+            font-size: 42px;
+            font-weight: 900;
+            color: var(--title-indigo);
+            margin: 0 0 10px 0;
+        }
+
+        .page-header p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background-color: var(--white);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin: 0 0 15px 0;
+            display: flex;
+            align-items: center;
+        }
+        .card-title .icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+        }
+
+        .card-content {
+            font-size: 20px;
+            font-weight: 500;
+        }
+        
+        .card-content .value {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--title-indigo);
+        }
+        
+        .card-content .unit {
+            font-size: 18px;
+            font-weight: 700;
+            margin-left: 5px;
+        }
+        
+        .card-content .status-tag {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--white);
+        }
+        .status-tag.high { background-color: var(--danger-red); }
+        .status-tag.medium { background-color: var(--accent-yellow); color: var(--title-indigo); }
+        .status-tag.low { background-color: var(--success-green); }
+
+        .result-container {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 30px;
+            align-items: stretch;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, var(--title-indigo), var(--kpi-green));
+            color: var(--white);
+            border-radius: 16px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .result-card .recommendation-title {
+            font-size: 20px;
+            font-weight: 700;
+            opacity: 0.8;
+            margin: 0 0 10px 0;
+        }
+
+        .result-card .recommendation-value {
+            font-size: 72px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin: 0 0 20px 0;
+        }
+        .result-card .recommendation-value .unit {
+            font-size: 24px;
+        }
+
+        .risk-warning {
+            font-size: 16px;
+            line-height: 1.6;
+            text-align: left;
+        }
+        .risk-warning strong {
+            font-weight: 700;
+        }
+        .risk-warning .high-risk { color: #ffc107; }
+        .risk-warning .low-risk { color: #20c997; }
+
+        .explanation-card {
+            background-color: var(--white);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        .explanation-card h3 {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--title-indigo);
+            margin: 0 0 20px 0;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 250px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">避錯寶<span>.Demo</span></div>
+            <div class="sidebar-nav-title">商業情境 Use Cases</div>
+            <button class="use-case-btn active" data-page="case1">
+                <span class="icon">👟</span> 高熱度話題商品
+            </button>
+            <button class="use-case-btn" data-page="case2">
+                <span class="icon">🌿</span> 利基市場新品
+            </button>
+            <button class="use-case-btn" data-page="case3">
+                <span class="icon">🧣</span> 季節性常規品
+            </button>
+            
+            <div class="sidebar-nav-title">即時參數調整</div>
+            <div class="input-control">
+                <label for="marketHeat">市場熱度: <span id="marketHeatValue" class="slider-value">89</span>/100</label>
+                <input type="range" id="marketHeat" min="0" max="100" value="89">
+            </div>
+             <div class="input-control">
+                <label for="marketStatus">市場狀態</label>
+                <select id="marketStatus">
+                    <option value="accelerating">加速成長期</option>
+                    <option value="emerging">趨勢萌芽期</option>
+                    <option value="recovering">季節性復甦</option>
+                    <option value="misleading">趨勢誤導期</option>
+                    <option value="decaying">需求衰弱期</option>
+                </select>
+            </div>
+             <div class="input-control">
+                <label for="competitorPrice">競品價格: <span id="competitorPriceValue" class="slider-value">-1.5</span></label>
+                <input type="range" id="competitorPrice" min="-5" max="5" value="-1.5" step="0.1">
+            </div>
+            <div class="input-control">
+                <label for="historicalSales">歷史銷量: <span id="historicalSalesValue" class="slider-value">4.0</span></label>
+                <input type="range" id="historicalSales" min="0" max="10" value="4.0" step="0.1">
+            </div>
+
+        </aside>
+
+        <main class="main-content">
+            <!-- Dynamic Page Content -->
+            <div id="demoPage" class="page active">
+                <header class="page-header">
+                    <h1 id="productTitle"></h1>
+                    <p id="productDescription"></p>
+                </header>
+
+                <div class="section-grid">
+                    <div class="card">
+                        <h4 class="card-title"><span class="icon">🔥</span>層級一：市場熱度</h4>
+                        <div class="card-content">
+                            <span class="value" id="displayHeat"></span><span class="unit">/ 100</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h4 class="card-title"><span class="icon">📈</span>層級一：市場狀態</h4>
+                        <div class="card-content">
+                            <span class="status-tag" id="displayStatus"></span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h4 class="card-title"><span class="icon">💬</span>層級一：社群語意</h4>
+                        <div class="card-content" id="displaySentiment" style="font-size: 18px;"></div>
+                    </div>
+                </div>
+
+                <div class="result-container">
+                    <div class="result-card">
+                        <div class="recommendation-title">層級二：AI 核心預測</div>
+                        <div class="recommendation-value" id="recommendationValue"></div>
+                        <div class="risk-warning" id="riskWarning"></div>
+                    </div>
+                    <div class="explanation-card">
+                        <h3>層級三：決策依據分析 (XAI)</h3>
+                        <div class="chart-container">
+                            <canvas id="xaiChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- DATA & CONFIG ---
+            const useCases = {
+                case1: {
+                    title: '情境一：高熱度話題商品',
+                    description: '<strong>商品：</strong>限量款復古米白球鞋 (OG-1985) <br/><strong>決策目標：</strong>判斷首次進貨量，在抓住市場熱度的同時，避免因過度樂觀而導致的庫存積壓。',
+                    sentiment: '正面討論度高<br/>(開箱、穿搭、求購)',
+                    basePrediction: 5,
+                    features: {
+                        heat: 89,
+                        status: 'accelerating',
+                        competitor: -1.5,
+                        history: 4.0,
+                        seasonality: 0,
+                        niche: 0,
+                    },
+                    featureLabels: ['社群聲量', '市場狀態', '競品價格', '歷史銷量']
+                },
+                case2: {
+                    title: '情境二：利基市場新品',
+                    description: '<strong>商品：</strong>小眾品牌補骨脂酚精華液 (Retinol-Alternative Serum)<br/><strong>決策目標：</strong>判斷此新品是否值得引進，並決定首次試水溫的採購量。',
+                    sentiment: '成分討論度上升<br/>(溫和、抗老、孕婦可用)',
+                    basePrediction: 10,
+                     features: {
+                        heat: 42,
+                        status: 'emerging',
+                        competitor: -1.0,
+                        history: 1.5,
+                        seasonality: 0,
+                        niche: 4.5,
+                    },
+                    featureLabels: ['成分趨勢', '市場狀態', '競品分析', '類似品銷量']
+                },
+                case3: {
+                    title: '情境三：季節性常規品',
+                    description: '<strong>商品：</strong>羊毛混紡格紋圍巾 (Classic Plaid Scarf)<br/><strong>決策目標：</strong>判斷今年秋季的補貨時機與數量，以應對即將到來的銷售旺季。',
+                    sentiment: '季節性需求明確<br/>(保暖、送禮、搭配)',
+                    basePrediction: 25,
+                    features: {
+                        heat: 65,
+                        status: 'recovering',
+                        competitor: -0.5,
+                        history: 3.0,
+                        seasonality: 5.0,
+                        niche: 0,
+                    },
+                    featureLabels: ['季節性指數', '去年同期銷量', '當前熱度', '時尚趨勢']
+                }
+            };
+            
+            let currentCaseId = 'case1';
+            let xaiChart;
+
+            // --- UI ELEMENTS ---
+            const useCaseButtons = document.querySelectorAll('.use-case-btn');
+            const heatSlider = document.getElementById('marketHeat');
+            const heatValueSpan = document.getElementById('marketHeatValue');
+            const statusSelect = document.getElementById('marketStatus');
+            const competitorSlider = document.getElementById('competitorPrice');
+            const competitorValueSpan = document.getElementById('competitorPriceValue');
+            const historySlider = document.getElementById('historicalSales');
+            const historyValueSpan = document.getElementById('historicalSalesValue');
+            
+            const productTitle = document.getElementById('productTitle');
+            const productDescription = document.getElementById('productDescription');
+            const displayHeat = document.getElementById('displayHeat');
+            const displayStatus = document.getElementById('displayStatus');
+            const displaySentiment = document.getElementById('displaySentiment');
+            const recommendationValue = document.getElementById('recommendationValue');
+            const riskWarning = document.getElementById('riskWarning');
+
+            // --- CORE LOGIC (MODEL SIMULATION) ---
+            function predictStockLevel(features) {
+                // 這是一個簡化的 JavaScript 模擬，其邏輯旨在模仿 XGBoost 模型的行為
+                // A real model would be trained on thousands of data points.
+                const weights = {
+                    heat: 0.1,
+                    status: { accelerating: 1.5, emerging: 1.2, recovering: 1.1, misleading: 0.8, decaying: 0.6 },
+                    competitor: 1,
+                    history: 1,
+                    seasonality: 1,
+                    niche: 1
+                };
+
+                const base = useCases[currentCaseId].basePrediction;
+                
+                // Calculate contributions for XAI chart
+                const heatContribution = features.heat * weights.heat;
+                const statusContribution = (weights.status[features.status] - 1) * base;
+                const competitorContribution = features.competitor * weights.competitor;
+                const historyContribution = features.history * weights.history;
+                
+                let totalContribution = heatContribution + statusContribution + competitorContribution + historyContribution;
+                
+                // Add case-specific contributions
+                let caseSpecificContributions = {};
+                if (currentCaseId === 'case2') {
+                    const nicheContribution = features.niche * weights.niche;
+                    totalContribution += nicheContribution;
+                    caseSpecificContributions = { niche: nicheContribution };
+                }
+                if (currentCaseId === 'case3') {
+                     const seasonalityContribution = features.seasonality * weights.seasonality;
+                     totalContribution += seasonalityContribution;
+                     caseSpecificContributions = { seasonality: seasonalityContribution };
+                }
+
+                const prediction = base + totalContribution;
+
+                // Quantile Regression Simulation
+                const lowerBound = Math.round(prediction * 0.8);
+                const upperBound = Math.round(prediction * 1.2);
+
+                return {
+                    prediction: Math.round(prediction),
+                    range: [Math.max(0, lowerBound), upperBound],
+                    contributions: {
+                        heat: heatContribution,
+                        status: statusContribution,
+                        competitor: competitorContribution,
+                        history: historyContribution,
+                        ...caseSpecificContributions
+                    }
+                };
+            }
+
+            // --- UI UPDATE FUNCTIONS ---
+            function updateUI() {
+                const currentFeatures = {
+                    heat: parseFloat(heatSlider.value),
+                    status: statusSelect.value,
+                    competitor: parseFloat(competitorSlider.value),
+                    history: parseFloat(historySlider.value),
+                    // Get case-specific features
+                    seasonality: currentCaseId === 'case3' ? useCases.case3.features.seasonality : 0,
+                    niche: currentCaseId === 'case2' ? useCases.case2.features.niche : 0,
+                };
+                
+                const result = predictStockLevel(currentFeatures);
+                const unit = currentCaseId === 'case1' ? '雙' : (currentCaseId === 'case2' ? '瓶' : '條');
+
+                // Update display cards
+                displayHeat.textContent = currentFeatures.heat.toFixed(0);
+                
+                const statusOption = statusSelect.querySelector(`option[value="${currentFeatures.status}"]`);
+                displayStatus.textContent = statusOption.textContent;
+                const statusClasses = {accelerating: 'high', emerging: 'medium', recovering: 'low', misleading: 'medium', decaying: 'high'};
+                displayStatus.className = `status-tag ${statusClasses[currentFeatures.status]}`;
+                
+
+                // Update recommendation
+                recommendationValue.innerHTML = `${result.range[0]}-${result.range[1]} <span class="unit">${unit}</span>`;
+                
+                // Update risk warning
+                const highRiskVal = result.range[1];
+                const lowRiskVal = result.range[0];
+                let riskText = '';
+                if (currentCaseId === 'case1') {
+                    riskText = `<strong class="high-risk">> ${highRiskVal} ${unit}：</strong>囤貨風險上升 (預估動銷 > 25天)<br/><strong class="low-risk">< ${lowRiskVal} ${unit}：</strong>錯失機會損失 (高缺貨風險)`;
+                } else if (currentCaseId === 'case2') {
+                    riskText = `<strong>建議：</strong>以小批量測試市場水溫。<br/><strong class="high-risk">> ${highRiskVal} ${unit}：</strong>新品接受度不明，風險高<br/><strong class="low-risk">< ${lowRiskVal} ${unit}：</strong>難以評估真實市場反應`;
+                } else {
+                    riskText = `<strong>建議：</strong>基於季節性需求，提前備貨。<br/><strong class="high-risk">> ${highRiskVal} ${unit}：</strong>過季後銷售將趨緩，產生庫存<br/><strong class="low-risk">< ${lowRiskVal} ${unit}：</strong>旺季高峰期可能面臨缺貨`;
+                }
+                riskWarning.innerHTML = riskText;
+
+                // Update chart
+                updateChart(result.contributions);
+            }
+            
+            function updateChart(contributions) {
+                const labels = useCases[currentCaseId].featureLabels;
+                const data = [];
+                
+                if(currentCaseId === 'case1') data.push(contributions.heat, contributions.status, contributions.competitor, contributions.history);
+                if(currentCaseId === 'case2') data.push(contributions.niche, contributions.status, contributions.competitor, contributions.history);
+                if(currentCaseId === 'case3') data.push(contributions.seasonality, contributions.history, contributions.heat, contributions.competitor);
+
+                xaiChart.data.labels = labels;
+                xaiChart.data.datasets[0].data = data.map(v => v > 0 ? v : 0);
+                xaiChart.data.datasets[1].data = data.map(v => v < 0 ? v : 0);
+                xaiChart.update();
+            }
+
+            function loadUseCase(caseId) {
+                currentCaseId = caseId;
+                const data = useCases[caseId];
+
+                // Update headers
+                productTitle.textContent = data.title;
+                productDescription.innerHTML = data.description;
+                displaySentiment.innerHTML = data.sentiment;
+
+                // Update input controls
+                heatSlider.value = data.features.heat;
+                heatValueSpan.textContent = data.features.heat;
+                statusSelect.value = data.features.status;
+                competitorSlider.value = data.features.competitor;
+                competitorValueSpan.textContent = data.features.competitor;
+                historySlider.value = data.features.history;
+                historyValueSpan.textContent = data.features.history;
+
+                // Trigger UI update
+                updateUI();
+            }
+
+            // --- INITIALIZATION ---
+            function init() {
+                // Initialize Chart
+                const chartConfig = {
+                    type: 'bar',
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return ` 貢獻度: ${context.raw.toFixed(2)}`;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                title: { display: true, text: `對建議數量的貢獻度 (${currentCaseId === 'case1' ? '雙' : (currentCaseId === 'case2' ? '瓶' : '條')})`, font: { weight: 'bold' } },
+                                stacked: true,
+                            },
+                            y: { stacked: true, ticks: { font: { weight: 'bold', size: 14 } } }
+                        }
+                    },
+                    data: {
+                        labels: [],
+                        datasets: [{
+                            label: '正面貢獻',
+                            data: [],
+                            backgroundColor: 'rgba(0, 194, 200, 0.8)',
+                        }, {
+                            label: '負面貢獻',
+                            data: [],
+                            backgroundColor: 'rgba(244, 208, 25, 0.8)',
+                        }]
+                    }
+                };
+                xaiChart = new Chart(document.getElementById('xaiChart'), chartConfig);
+
+                // Setup Event Listeners
+                useCaseButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        useCaseButtons.forEach(btn => btn.classList.remove('active'));
+                        button.classList.add('active');
+                        loadUseCase(button.dataset.page);
+                    });
+                });
+
+                [heatSlider, statusSelect, competitorSlider, historySlider].forEach(el => {
+                    el.addEventListener('input', updateUI);
+                });
+
+                heatSlider.addEventListener('input', () => heatValueSpan.textContent = heatSlider.value);
+                competitorSlider.addEventListener('input', () => competitorValueSpan.textContent = parseFloat(competitorSlider.value).toFixed(1));
+                historySlider.addEventListener('input', () => historyValueSpan.textContent = parseFloat(historySlider.value).toFixed(1));
+
+                // Load initial case
+                loadUseCase('case1');
+            }
+
+            init();
+        });
+    </script>
+
+</body>
+</html>

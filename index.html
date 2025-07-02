@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>避錯寶 (Bitrobo) - AI 告訴你該進多少貨 (Puter.js 整合版)</title>
     
-    <script src="[https://js.puter.com/v2/](https://js.puter.com/v2/)"></script>
+    <script src="https://js.puter.com/v2/"></script>
     
-    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
-    <link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
-    <link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
-    <link href="[https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap](https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap)" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
+        html { scroll-behavior: smooth; }
         body {
             font-family: 'Inter', 'Noto Sans TC', sans-serif;
             background-color: #f8fafc; /* slate-50 */
@@ -59,13 +60,13 @@
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="index.html" class="text-2xl font-bold gradient-text">避錯寶</a>
             <div class="hidden md:flex items-center space-x-6">
-                <a href="features.html" class="text-slate-600 hover:text-indigo-600">功能介紹</a>
-                <a href="pricing.html" class="text-slate-600 hover:text-indigo-600">方案與定價</a>
-                <a href="blog.html" class="text-slate-600 hover:text-indigo-600">資源部落格</a>
+                <a href="#features" class="text-slate-600 hover:text-indigo-600">功能介紹</a>
+                <a href="#pricing" class="text-slate-600 hover:text-indigo-600">方案與定價</a>
+                <a href="#blog" class="text-slate-600 hover:text-indigo-600">資源部落格</a>
             </div>
             <div class="flex items-center space-x-4">
-                <a href="auth.html" class="text-slate-600 hover:text-indigo-600">登入</a>
-                <a href="auth.html" class="bg-indigo-600 text-white px-5 py-2 rounded-full font-semibold hover:bg-indigo-700 cta-button">免費開始使用</a>
+                <a href="#login" class="text-slate-600 hover:text-indigo-600">登入</a>
+                <a href="#signup" class="bg-indigo-600 text-white px-5 py-2 rounded-full font-semibold hover:bg-indigo-700 cta-button">免費開始使用</a>
             </div>
         </nav>
     </header>
@@ -99,7 +100,7 @@
             </div>
         </section>
 
-        <section class="py-24 bg-white">
+        <section id="features" class="py-24 bg-white">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl md:text-4xl font-bold text-slate-900">事業成長的三個簡單步驟</h2>
@@ -108,21 +109,21 @@
                 <div class="grid md:grid-cols-3 gap-8">
                     <div class="text-center p-8 feature-card transition-all duration-300">
                         <div class="bg-slate-100 text-indigo-600 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto shadow-inner">
-                             <svg xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" /></svg>
+                             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" /></svg>
                         </div>
                         <h3 class="mt-6 text-xl font-bold text-slate-800">1. 整合您的庫存</h3>
                         <p class="mt-2 text-slate-500">從現在開始，告別混亂。免費使用我們的工具，將您所有平台的庫存整合至單一儀表板，一目了然。</p>
                     </div>
                     <div class="text-center p-8 feature-card transition-all duration-300">
                         <div class="bg-slate-100 text-indigo-600 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto shadow-inner">
-                            <svg xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
                         </div>
                         <h3 class="mt-6 text-xl font-bold text-slate-800">2. 洞察市場脈動</h3>
                         <p class="mt-2 text-slate-500">想知道下一個爆款？我們的 AI 為您分析全網社群聲量與搜尋趨勢，讓您永遠走在市場最前端。</p>
                     </div>
                     <div class="text-center p-8 feature-card transition-all duration-300">
                         <div class="bg-slate-100 text-indigo-600 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto shadow-inner">
-                            <svg xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
                         </div>
                         <h3 class="mt-6 text-xl font-bold text-slate-800">3. 獲取精準建議</h3>
                         <p class="mt-2 text-slate-500">最關鍵的一步。AI 會直接給您精準的進貨數量區間，讓您不再為庫存煩惱，每次進貨都充滿信心。</p>
@@ -138,12 +139,12 @@
                     <p class="mt-4 text-lg text-slate-600">我們將所有複雜數據，轉化為您看得懂的洞察。</p>
                  </div>
                  <div class="relative">
-                    <img src="[https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2](https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)" alt="避錯寶儀表板" class="rounded-2xl shadow-2xl">
-                </div>
+                    <img src="https://raw.githubusercontent.com/hctsai1006/hctsai1006.github.io/main/consumer-verse/app-dashboard-1.png" alt="避錯寶儀表板" class="rounded-2xl shadow-2xl">
+                 </div>
             </div>
         </section>
 
-        <section class="py-24 bg-white">
+        <section id="pricing" class="py-24 bg-white">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl md:text-4xl font-bold text-slate-900">聽聽頂尖賣家怎麼說</h2>
@@ -152,7 +153,7 @@
                     <div class="bg-slate-50 p-8 rounded-2xl">
                         <p class="text-slate-600">「以前進 Dunk 都靠感覺，常常不是進太多賣不掉，就是進太少賺不夠。用了避錯寶，AI 直接給我建議區間，現在庫存健康很多，資金週轉也順了！」</p>
                         <div class="flex items-center mt-6">
-                            <img class="h-12 w-12 rounded-full object-cover" src="[https://placehold.co/48x48/E2E8F0/475569?text=老闆A](https://placehold.co/48x48/E2E8F0/475569?text=老闆A)" alt="使用者頭像">
+                            <img class="h-12 w-12 rounded-full object-cover" src="https://raw.githubusercontent.com/hctsai1006/hctsai1006.github.io/main/consumer-verse/allen.png" alt="使用者頭像">
                             <div class="ml-4">
                                 <p class="font-bold text-slate-900">Allen / 球鞋選物店主理人</p>
                             </div>
@@ -161,7 +162,7 @@
                     <div class="bg-slate-50 p-8 rounded-2xl">
                         <p class="text-slate-600">「做韓國美妝代購，新品週期超快，根本沒時間研究趨勢。避錯寶的市場分析功能幫我省下大把時間，推薦的新品也都賣得很好，利潤直接提升 30%！」</p>
                         <div class="flex items-center mt-6">
-                            <img class="h-12 w-12 rounded-full object-cover" src="[https://placehold.co/48x48/E2E8F0/475569?text=闆娘B](https://placehold.co/48x48/E2E8F0/475569?text=闆娘B)" alt="使用者頭像">
+                            <img class="h-12 w-12 rounded-full object-cover" src="https://raw.githubusercontent.com/hctsai1006/hctsai1006.github.io/main/consumer-verse/vivian.png" alt="使用者頭像">
                             <div class="ml-4">
                                 <p class="font-bold text-slate-900">Vivian / 韓國美妝代購</p>
                             </div>
@@ -170,7 +171,7 @@
                     <div class="bg-slate-50 p-8 rounded-2xl">
                         <p class="text-slate-600">「最棒的是免費的庫存管理功能，光是能把所有庫存整合在一起看，就已經解決我最大的痛點。現在正考慮升級 Pro 版，試試看 AI 進貨建議。」</p>
                         <div class="flex items-center mt-6">
-                            <img class="h-12 w-12 rounded-full object-cover" src="[https://placehold.co/48x48/E2E8F0/475569?text=賣家C](https://placehold.co/48x48/E2E8F0/475569?text=賣家C)" alt="使用者頭像">
+                            <img class="h-12 w-12 rounded-full object-cover" src="https://raw.githubusercontent.com/hctsai1006/hctsai1006.github.io/main/consumer-verse/kaga.png" alt="使用者頭像">
                             <div class="ml-4">
                                 <p class="font-bold text-slate-900">阿嘎 / 蝦皮個人賣家</p>
                             </div>
@@ -180,7 +181,7 @@
             </div>
         </section>
 
-        <section class="py-24">
+        <section id="signup" class="py-24">
             <div class="container mx-auto px-6 text-center">
                 <h2 class="text-4xl md:text-5xl font-bold text-slate-900">準備好迎接零庫存風險的未來了嗎？</h2>
                 <p class="mt-6 text-lg text-slate-600">立即註冊，永久免費使用智慧庫存管理功能。無須綁定信用卡。</p>
@@ -191,7 +192,7 @@
         </section>
     </main>
 
-    <footer class="bg-slate-900 text-slate-400">
+    <footer id="blog" class="bg-slate-900 text-slate-400">
         <div class="container mx-auto px-6 py-12">
             <div class="grid md:grid-cols-4 gap-8">
                 <div>
@@ -201,16 +202,16 @@
                 <div>
                     <h4 class="font-semibold text-white mb-4">產品</h4>
                     <ul class="space-y-2">
-                        <li><a href="features.html" class="hover:text-white">功能介紹</a></li>
-                        <li><a href="pricing.html" class="hover:text-white">方案與定價</a></li>
+                        <li><a href="#features" class="hover:text-white">功能介紹</a></li>
+                        <li><a href="#pricing" class="hover:text-white">方案與定價</a></li>
                         <li><a href="#" class="hover:text-white">成功案例</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="font-semibold text-white mb-4">資源</h4>
                     <ul class="space-y-2">
-                        <li><a href="blog.html" class="hover:text-white">部落格</a></li>
-                        <li><a href="help.html" class="hover:text-white">幫助中心</a></li>
+                        <li><a href="#" class="hover:text-white">部落格</a></li>
+                        <li><a href="#" class="hover:text-white">幫助中心</a></li>
                         <li><a href="#" class="hover:text-white">聯絡我們</a></li>
                     </ul>
                 </div>
@@ -251,7 +252,7 @@
             demoResult.classList.add('hidden');
             demoError.classList.add('hidden');
             
-            // 3. 強化 Prompt
+            // --- Define Schema and Build Prompt ---
             const schema = {
                 type: "OBJECT",
                 properties: {
@@ -263,32 +264,40 @@
             };
 
             const prompt = `
-                您是「避錯寶」的 AI 分析師。請根據台灣市場的普遍趨勢，為商品「${productName}」提供一個快速的進貨建議。
-                您的回覆「必須」是純粹的 JSON 格式，不包含任何額外文字、註解或 markdown 符號。
+                您是「避錯寶」的 AI 分析師。請根據台灣市場截至 2025 年 7 月的普遍趨勢，為商品「${productName}」提供一個快速的進貨建議。
+                您的回覆「必須」是純粹的 JSON 格式，不包含任何額外文字、註解或 markdown 語法 (例如 \`\`\`json)。
 
                 JSON 格式定義如下:
                 ${JSON.stringify(schema, null, 2)}
             `;
             
-            // 4. 改用 Puter.js 進行 API 呼叫並增強穩定性
+            // --- Make the API call using Puter.js ---
             try {
-                const response = await puter.ai.chat(prompt, {
-                   model: 'google/gemini-flash-1.5',
-                   stream: false
+                const ai_response = await puter.ai.chat(prompt, {
+                    model: 'google/gemini-flash-1.5',
+                    stream: false,
+                    temperature: 0.2
                 });
 
-                if (!response.message || !response.message.content) {
-                    throw new Error("AI 未能提供有效的分析結果。");
+                if (!ai_response.message || !ai_response.message.content) {
+                    throw new Error("AI 回應為空，無法解析。");
                 }
                 
-                // 穩定性增強：清理 AI 可能回傳的 markdown 符號
-                let jsonString = response.message.content.trim();
+                // --- Robust JSON Parsing ---
+                let jsonString = ai_response.message.content.trim();
                 const jsonMatch = jsonString.match(/```json\n([\s\S]*?)\n```/);
                 if (jsonMatch && jsonMatch[1]) {
                     jsonString = jsonMatch[1];
                 }
 
-                const aiData = JSON.parse(jsonString);
+                let aiData;
+                try {
+                    aiData = JSON.parse(jsonString);
+                } catch (parseError) {
+                    console.error("無法將 AI 回應解析為 JSON:", jsonString);
+                    throw new Error("AI 回應的格式不是有效的 JSON，請再試一次。");
+                }
+
                 updateDemoUI(aiData);
 
             } catch (error) {
@@ -316,7 +325,7 @@
                     <p class="text-4xl font-bold text-indigo-600 my-2">${minStock} - ${maxStock} <span class="text-2xl font-medium">件</span></p>
                     <p class="text-sm font-semibold ${riskColor}">風險等級：${riskLevel}</p>
                 </div>
-                <p class="text-xs text-center text-slate-400 mt-4">想解鎖完整分析？<a href="auth.html" class="underline">免費註冊</a>以查看詳細報告。</p>
+                <p class="text-xs text-center text-slate-400 mt-4">想解鎖完整分析？<a href="#signup" class="underline">免費註冊</a>以查看詳細報告。</p>
             `;
             demoResult.classList.remove('hidden');
         }
@@ -326,6 +335,20 @@
             if (e.key === 'Enter') {
                 getAiDemoAnalysis();
             }
+        });
+
+        // Make anchor links scroll smoothly
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                   targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
         });
     </script>
 </body>
